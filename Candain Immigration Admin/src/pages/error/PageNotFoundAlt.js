@@ -1,15 +1,22 @@
 // @flow
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 
 // components
-import PageTitle from '../../components/PageTitle';
+import PageTitle from '../../helpers/PageTitle';
 
 // images
 import notFoundImg from '../../assets/images/file-searching.svg';
 
 const ErrorPageNotFoundAlt = (): React$Element<React$FragmentType> => {
+
+    const navigate = useNavigate()
+    const handleBack = () => {
+        sessionStorage.removeItem('mozimo_user');
+        navigate('/account/login')
+        window.location.reload();
+    }
     return (
         <>
             <PageTitle
@@ -33,7 +40,7 @@ const ErrorPageNotFoundAlt = (): React$Element<React$FragmentType> => {
                                     best of us. Here's a little tip that might help you get back on track.
                                 </p>
 
-                                <Link className="btn btn-info mt-3" to="/">
+                                <Link className="btn btn-info mt-3" to="/" onClick={handleBack}>
                                     <i className="mdi mdi-reply"></i> Return Home
                                 </Link>
                             </div>

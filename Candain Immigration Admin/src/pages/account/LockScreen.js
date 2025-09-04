@@ -10,9 +10,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { VerticalForm, FormInput } from '../../components/';
 
 import AccountLayout from './AccountLayout';
-
+import { Logo } from '../../helpers/image';
 // images
-import avatar1 from '../../assets/images/users/avatar-1.jpg';
 
 /* bottom link */
 const BottomLink = () => {
@@ -54,7 +53,7 @@ const LockScreen = (): React$Element<any> => {
         <>
             <AccountLayout bottomLinks={<BottomLink />}>
                 <div className="text-center w-75 m-auto">
-                    <img src={avatar1} height="64" alt="" className="rounded-circle shadow" />
+                    <img src={Logo} height="64" alt="" className="rounded-circle shadow" />
                     <h4 className="text-dark-50 text-center mt-3 fw-bold">{t('Hi ! Michael ')}</h4>
                     <p className="text-muted mb-4">{t('Enter your password to access the admin.')}</p>
                 </div>

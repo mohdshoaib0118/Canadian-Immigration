@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 // images
-import Logo from '../../assets/logo.png';
+import { Logo } from '../../helpers/image';
 
 type AccountLayoutProps = {
     bottomLinks?: React$Element<any>,
@@ -14,6 +14,7 @@ type AccountLayoutProps = {
 
 const AccountLayout = ({ bottomLinks, children }: AccountLayoutProps): React$Element<any> => {
     const { t } = useTranslation();
+    const currentYear = new Date().getFullYear();
 
     useEffect(() => {
         if (document.body) document.body.classList.add('authentication-bg');
@@ -31,10 +32,10 @@ const AccountLayout = ({ bottomLinks, children }: AccountLayoutProps): React$Ele
                         <Col md={8} lg={6} xl={5} xxl={4}>
                             <Card>
                                 {/* logo */}
-                                <Card.Header className="pt-4 pb-4 text-center bg-primary">
+                                <Card.Header className=" text-center" style={{ backgroundColor: '#008003' }}>
                                     <Link to="/">
                                         <span>
-                                            <img src={Logo} alt="" height="30" />
+                                            <img src={Logo} alt="" height="70" className='bg-light rounded-pill px-3' />
                                         </span>
                                     </Link>
                                 </Card.Header>
@@ -47,7 +48,7 @@ const AccountLayout = ({ bottomLinks, children }: AccountLayoutProps): React$Ele
                     </Row>
                 </Container>
             </div>
-            <footer className="footer footer-alt">{t('2018 - 2021 © Hyper - Coderthemes.com')}</footer>
+            <footer className="footer footer-alt">{currentYear} © BMG - <a href="https://rowthtech.com/" className='text-muted'><u>rowthtech.com</u></a></footer>
         </>
     );
 };

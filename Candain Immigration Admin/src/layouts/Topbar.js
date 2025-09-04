@@ -3,111 +3,39 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import classNames from 'classnames';
-
+import { Logo,BmgLogo } from '../helpers/image'
 // actions
 import { showRightSidebar, changeSidebarType } from '../redux/actions';
 
 // components
-import LanguageDropdown from '../components/LanguageDropdown';
-import NotificationDropdown from '../components/NotificationDropdown';
 import ProfileDropdown from '../components/ProfileDropdown';
-import SearchDropdown from '../components/SearchDropdown';
-import TopbarSearch from '../components/TopbarSearch';
-import AppsDropdown from '../components/AppsDropdown/';
-
-// images
-import profilePic from '../assets/images/users/avatar-1.jpg';
-import avatar1 from '../assets/images/users/avatar-2.jpg';
-import avatar2 from '../assets/images/users/avatar-4.jpg';
-import logoSmDark from '../assets/images/logo_sm_dark.png';
-import logoSmLight from '../assets/images/logo_sm.png';
-import logo from '../assets/images/logo-light.png';
 
 //constants
 import * as layoutConstants from '../constants/layout';
-
-// get the notifications
-const Notifications = [
-    {
-        day: 'Today',
-        messages: [
-            {
-                id: 1,
-                title: 'Datacorp',
-                subText: 'Caleb Flakelar commented on Admin',
-                time: '1 min ago',
-                icon: 'mdi mdi-comment-account-outline',
-                variant: 'primary',
-                isRead: false,
-            },
-            {
-                id: 2,
-                title: 'Admin',
-                subText: 'New user registered.',
-                time: '1 hours ago',
-                icon: 'mdi mdi-account-plus',
-                variant: 'info',
-                isRead: true,
-            },
-        ],
-    },
-    {
-        day: 'Yesterday',
-        messages: [
-            {
-                id: 1,
-                title: 'Cristina Pride',
-                subText: 'Hi, How are you? What about our next meeting',
-                time: '1 day ago',
-                avatar: avatar1,
-                isRead: true,
-            },
-        ],
-    },
-    {
-        day: '30 Dec 2021',
-        messages: [
-            {
-                id: 1,
-                title: 'Datacorp',
-                subText: 'Caleb Flakelar commented on Admin',
-                icon: 'mdi mdi-comment-account-outline',
-                variant: 'primary',
-                isRead: true,
-            },
-            {
-                id: 2,
-                title: 'Karen Robinson',
-                subText: 'Wow ! this admin looks good and awesome design',
-                avatar: avatar2,
-                isRead: true,
-            },
-        ],
-    },
-];
+import ThemeToggle from '../helpers/ThemeToggle';
 
 // get the profilemenu
 const ProfileMenus = [
-    {
-        label: 'My Account',
-        icon: 'mdi mdi-account-circle',
-        redirectTo: '#',
-    },
-    {
-        label: 'Settings',
-        icon: 'mdi mdi-account-edit',
-        redirectTo: '#',
-    },
-    {
-        label: 'Support',
-        icon: 'mdi mdi-lifebuoy',
-        redirectTo: '#',
-    },
-    {
-        label: 'Lock Screen',
-        icon: 'mdi mdi-lock-outline',
-        redirectTo: '/account/lock-screen',
-    },
+    // {
+    //     label: 'My Account',
+    //     icon: 'mdi mdi-account-circle',
+    //     redirectTo: '#',
+    // },
+    // {
+    //     label: 'Settings',
+    //     icon: 'mdi mdi-account-edit',
+    //     redirectTo: '#',
+    // },
+    // {
+    //     label: 'Support',
+    //     icon: 'mdi mdi-lifebuoy',
+    //     redirectTo: '#',
+    // },
+    // {
+    //     label: 'Lock Screen',
+    //     icon: 'mdi mdi-lock-outline',
+    //     redirectTo: '/account/lock-screen',
+    // },
     {
         label: 'Logout',
         icon: 'mdi mdi-logout',
@@ -177,39 +105,39 @@ const Topbar = ({ hideLogo, navCssClasses, openLeftMenuCallBack, topbarDark }: T
                     {!hideLogo && (
                         <Link to="/" className="topnav-logo">
                             <span className="topnav-logo-lg">
-                                <img src={logo} alt="logo" height="16" />
+                                <img src={Logo} alt="logo" height="70" />
                             </span>
                             <span className="topnav-logo-sm">
-                                <img src={topbarDark ? logoSmLight : logoSmDark} alt="logo" height="16" />
+                                <img src={topbarDark ? Logo : Logo} alt="logo" height="50" />
                             </span>
                         </Link>
                     )}
 
                     <ul className="list-unstyled topbar-menu float-end mb-0">
-                        <li className="notification-list topbar-dropdown d-xl-none">
-                            <SearchDropdown />
-                        </li>
-                        <li className="dropdown notification-list topbar-dropdown d-none d-lg-block">
+                        {/* <li className="dropdown notification-list topbar-dropdown d-none d-lg-block">
                             <LanguageDropdown />
-                        </li>
-                        <li className="dropdown notification-list">
+                        </li> */}
+                        {/* <li className="dropdown notification-list">
                             <NotificationDropdown notifications={Notifications} />
-                        </li>
-                        <li className="dropdown notification-list d-none d-sm-inline-block">
+                        </li> */}
+                        {/* <li className="dropdown notification-list d-none d-sm-inline-block">
                             <AppsDropdown />
-                        </li>
-                        <li className="notification-list">
+                        </li> */}
+                        {/* <li className="notification-list">
                             <button
                                 className="nav-link dropdown-toggle end-bar-toggle arrow-none btn btn-link shadow-none"
                                 onClick={handleRightSideBar}>
                                 <i className="dripicons-gear noti-icon"></i>
                             </button>
-                        </li>
+                        </li> */}
+                        {/* <li className="dropdown notification-list mt-3 me-3">
+                            <ThemeToggle/>
+                        </li> */}
                         <li className="dropdown notification-list">
                             <ProfileDropdown
-                                profilePic={profilePic}
+                                profilePic={BmgLogo}
                                 menuItems={ProfileMenus}
-                                username={'Dominic Keller'}
+                                username={'BMG Admin'}
                                 userTitle={'Founder'}
                             />
                         </li>
@@ -246,7 +174,6 @@ const Topbar = ({ hideLogo, navCssClasses, openLeftMenuCallBack, topbarDark }: T
                             </div>
                         </Link>
                     )}
-                    <TopbarSearch />
                 </div>
             </div>
         </>

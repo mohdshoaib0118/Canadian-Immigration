@@ -1,45 +1,12 @@
 // @flow
 import { APICore } from './apiCore';
-import * as URL from "../../constants/endPoints"
-import * as STRING from "../../constants/string"
 
 const api = new APICore();
 
-const getEndPontForLogin = (role) => {
-    switch (role) {
-        case STRING.ADMIN:
-            return URL.ADMIN_LOGIN
-            break;
-        case STRING.EMPLOYEE:
-            return URL.EMPLOYEE_LOGIN
-            break;
-        case STRING.STORE:
-            return URL.STORE_LOGIN
-            break;
-        default:
-            throw STRING.PLEASE_SELECT_ROLE
-    }
-}
-
-const getPrepairLoginData = (params) => {
-    switch (params.role) {
-        case STRING.ADMIN:
-            return { username: params.username, password: params.password, role: params.role.toUpperCase() }
-            break;
-        case STRING.EMPLOYEE:
-            return { email: params.username, password: params.password, role: params.role.toUpperCase() }
-            break;
-        case STRING.STORE:
-            return { login: params.username, password: params.password, role: params.role.toUpperCase() }
-            break;
-        default:
-            throw STRING.PLEASE_SELECT_ROLE
-    }
-}
 // account
 function login(params: any): any {
-    const baseUrl = getEndPontForLogin(params.role);
-    return api.create(`${baseUrl}`, getPrepairLoginData(params));
+    const baseUrl = '/api/admin/signIn';
+    return api.create(`${baseUrl}`, params);
 }
 
 function logout(): any {

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Row, Col, Card } from 'react-bootstrap';
 
 // images
-import Logo from '../../assets/logo.png';
+import Logo from '../../assets/images/logo.png';
 
 const ErrorPageNotFound = (): React$Element<React$FragmentType> => {
     return (
@@ -18,7 +18,7 @@ const ErrorPageNotFound = (): React$Element<React$FragmentType> => {
                                 <Card.Header className="pt-4 pb-4 text-center bg-primary">
                                     <Link to="/">
                                         <span>
-                                            <img src={Logo} alt="" height="40" />
+                                            <img src={Logo} alt="" height="18" />
                                         </span>
                                     </Link>
                                 </Card.Header>
