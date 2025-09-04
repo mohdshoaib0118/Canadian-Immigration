@@ -5,7 +5,7 @@ const api = new APICore();
 
 // account
 function login(params: any): any {
-    const baseUrl = '/api/admin/signIn';
+    const baseUrl = '/api/auth/login';
     return api.create(`${baseUrl}`, params);
 }
 

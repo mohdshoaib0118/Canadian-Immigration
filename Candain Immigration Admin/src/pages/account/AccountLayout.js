@@ -35,7 +35,7 @@ const AccountLayout = ({ bottomLinks, children }: AccountLayoutProps): React$Ele
                                 <Card.Header className=" text-center" style={{ backgroundColor: '#008003' }}>
                                     <Link to="/">
                                         <span>
-                                            <img src={Logo} alt="" height="70" className='bg-light rounded-pill px-3' />
+                                            <img src={Logo} alt="" height="50" className='bg-light' />
                                         </span>
                                     </Link>
                                 </Card.Header>

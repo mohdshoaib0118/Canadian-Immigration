@@ -1,19 +1,24 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const { connectDb } = require('./config/db');
-const routes=require('./routes/index');
+const routes = require('./routes/index');
 dotenv.config();
 const app = express();
 const path = require('path');
-
+var cors = require('cors')
 
 // Middleware
 app.use(express.json());
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 
 // Database Connection
 connectDb();
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve static images
- 
+
 // Routes
 app.use(routes);
 
