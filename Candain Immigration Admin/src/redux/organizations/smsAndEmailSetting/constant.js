@@ -1,0 +1,10 @@
+const SmsAndEmailActionTypes = {
+
+    // start list 
+    GET_SMS_AND_EMAIL_LIST: '@@GET_SMS_AND_EMAIL_LIST',
+    SMS_AND_EMAIL_LIST_LOADING: '@@SMS_AND_EMAIL_LIST/LOADING',
+    SMS_AND_EMAIL_LIST_SUCCESS: '@@SMS_AND_EMAIL_LIST/SUCESS',
+    SMS_AND_EMAIL_LIST_ERROR: '@@SMS_AND_EMAIL_LIST/ERROR',
+
+}
+export default SmsAndEmailActionTypes
