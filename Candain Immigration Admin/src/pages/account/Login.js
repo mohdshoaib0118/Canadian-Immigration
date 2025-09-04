@@ -1,12 +1,12 @@
 // @flow
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Button, Alert, Row, Col } from 'react-bootstrap';
 import { Link, Navigate, useLocation } from 'react-router-dom';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
-
+import { Logo } from '../../helpers/image';
 //actions
 import { resetAuth, loginUser } from '../../redux/actions';
 
@@ -14,25 +14,25 @@ import { resetAuth, loginUser } from '../../redux/actions';
 import { VerticalForm, FormInput } from '../../components/';
 
 import AccountLayout from './AccountLayout';
-import * as STRING from '../../constants/string';
+import { ButtonLoading } from '../../helpers/loader/Loading';
 
 /* bottom link of account pages */
-const BottomLink = () => {
-    const { t } = useTranslation();
+// const BottomLink = () => {
+//     const { t } = useTranslation();
 
-    return (
-        <Row className="mt-3">
-            <Col className="text-center">
-                <p className="text-muted">
-                    {t("Don't have an account?")}{' '}
-                    <Link to={'/account/register'} className="text-muted ms-1">
-                        <b>{t('Sign Up')}</b>
-                    </Link>
-                </p>
-            </Col>
-        </Row>
-    );
-};
+//     return (
+//         <Row className="mt-3">
+//             <Col className="text-center">
+//                 <p className="text-muted">
+//                     {t("Don't have an account?")}{' '}
+//                     <Link to={'/account/register'} className="text-muted ms-1">
+//                         <b>{t('Sign Up')}</b>
+//                     </Link>
+//                 </p>
+//             </Col>
+//         </Row>
+//     );
+// };
 
 const Login = (): React$Element<any> => {
     const { t } = useTranslation();
@@ -57,7 +57,7 @@ const Login = (): React$Element<any> => {
     */
     const schemaResolver = yupResolver(
         yup.object().shape({
-            username: yup.string().required(t('Please enter Username')),
+            email: yup.string().required(t('Please enter email')),
             password: yup.string().required(t('Please enter Password')),
         })
     );
@@ -66,16 +66,17 @@ const Login = (): React$Element<any> => {
     handle form submission
     */
     const onSubmit = (formData) => {
-        dispatch(loginUser(formData['username'], formData['password'], formData['role']));
+        dispatch(loginUser(formData['email'], formData['password']));
     };
 
     return (
         <>
             {(userLoggedIn || user) && <Navigate to={redirectUrl} replace />}
 
-            <AccountLayout bottomLinks={<BottomLink />}>
+            {/* <AccountLayout bottomLinks={<BottomLink />}> */}
+            <AccountLayout>
                 <div className="text-center w-75 m-auto">
-                    <h4 className="text-dark-50 text-center mt-0 fw-bold">{t('Sign In')}</h4>
+                    <h4 className="text-dark-50 text-center mt-0 fw-bold">{t('Log In')}</h4>
                     <p className="text-muted mb-4">
                         {t('Enter your email address and password to access admin panel.')}
                     </p>
@@ -90,23 +91,13 @@ const Login = (): React$Element<any> => {
                 <VerticalForm
                     onSubmit={onSubmit}
                     resolver={schemaResolver}
-                    defaultValues={{ username: '', password: '' }}>
+                //  defaultValues={{ email: 'test', password: 'test' }}
+                >
                     <FormInput
-                        label={t('Role')}
-                        name="role"
-                        type="select"
-                        className="form-select form-select-sm py-1 mb-3"
-                        key="select">
-                        <option hidden>{STRING.SELECT_ROLE}</option>
-                        <option value={STRING.ADMIN}>Admin</option>
-                        <option value={STRING.EMPLOYEE}>Employee</option>
-                        <option value={STRING.STORE}>Store</option>
-                    </FormInput>
-                    <FormInput
-                        label={t('Username')}
+                        label={t('Email')}
                         type="text"
-                        name="username"
-                        placeholder={t('Enter your Username')}
+                        name="email"
+                        placeholder={t('Enter your email')}
                         containerClass={'mb-3'}
                     />
                     <FormInput
@@ -115,14 +106,14 @@ const Login = (): React$Element<any> => {
                         name="password"
                         placeholder={t('Enter your password')}
                         containerClass={'mb-3'}>
-                        <Link to="/account/forget-password" className="text-muted float-end">
+                        {/* <Link to="/account/forget-password" className="text-muted float-end">
                             <small>{t('Forgot your password?')}</small>
-                        </Link>
+                        </Link> */}
                     </FormInput>
 
                     <div className="mb-3 mb-0 text-center">
-                        <Button variant="primary" type="submit" disabled={loading}>
-                            {t('Log In')}
+                        <Button style={{ backgroundColor: '#008003' }} className='shadow-none border-0' type="submit" disabled={loading}>
+                            {!loading ? (<>{t('Log In')}</>) : (<ButtonLoading />)}
                         </Button>
                     </div>
                 </VerticalForm>

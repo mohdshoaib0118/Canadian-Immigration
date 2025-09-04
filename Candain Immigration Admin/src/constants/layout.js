@@ -11,7 +11,7 @@ export const LAYOUT_COLOR_DARK = 'dark';
 export const LAYOUT_WIDTH_FLUID = 'fluid';
 export const LAYOUT_WIDTH_BOXED = 'boxed';
 
-export const LEFT_SIDEBAR_THEME_DEFAULT = 'default';
+export const LEFT_SIDEBAR_THEME_DEFAULT = 'light';
 export const LEFT_SIDEBAR_THEME_LIGHT = 'light';
 export const LEFT_SIDEBAR_THEME_DARK = 'dark';
 

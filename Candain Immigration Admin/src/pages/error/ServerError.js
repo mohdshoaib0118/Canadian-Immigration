@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Row, Col, Card } from 'react-bootstrap';
 
 // components
-import Logo from '../../assets/logo.png';
+import Logo from '../../assets/images/logo.png';
 
 // images
 import notFoundImg from '../../assets/images/startman.svg';

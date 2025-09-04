@@ -1,42 +1,96 @@
 // @flow
 import { combineReducers } from 'redux';
-import Auth from './auth/reducers';
-import Layout from './layout/reducers';
-import { EmployeeList, EmployeeCreate, EmployeeUpdate, EmployeeDetails } from './employee/reducers';
-import { StoreList, StoreCreate, StoreUpdate, StoreDetails } from './locationStore/reducers';
-import { OrderList } from "./transactions/order/reducers"
-import { PackageList } from './transactions/packageList/reducer'
-import { AssignedPackageList, AssignPackageCreate } from './transactions/assignedPackageList/reducer'
-import { AdminProfile } from './organizations/adminProfile/reducers';
-import { SmsAndEmail } from './organizations/smsAndEmailSetting/reducers';
-import { ServiceCategoryList, ServiceCategoryUpdate } from './productService/serviceCategory/reducers'
-import { BrandList, BrandCreate, BrandUpdate } from './productService/productBrand/reducers'
-import { DefectList, DefectCreate, DefectUpdate } from './productService/productDefects/reducers'
 
-export default (combineReducers({
+import Auth from './auth/reducers';
+
+import Layout from './layout/reducers';
+
+import { dashboardDataReducer, getRecentRegistrationsForDashboardReducer } from './dashboard/reducers';
+import {
+    categoryDataReducer,
+    subCategoryDataReducer,
+    createCategoryDataReducer,
+    updatecategoryDataReducer,
+    deletecategoryDataReducer,
+    categoryAllDataReducer,
+    createSubCategoryDataReducer,
+} from './category/reducers';
+
+import {
+    productDataReducer,
+    createProductDataReducer,
+    updateProductDataReducer,
+    deleteProductDataReducer,
+    specificProductDataReducer,
+} from './products/reducers';
+import { faqDataReducer, createFaqDataReducer, updateFaqDataReducer, deleteFaqDataReducer } from './faq/reducers';
+import { userDataReducer } from './user/reducers';
+import { getOrderDataReducer } from './orders/reducers';
+import { leadDataReducer, soldProductDataReducer, getLiveBidDataReducer } from './auctionLead/reducers';
+import { enquiryDataReducer } from './enquiry/reducers';
+import { getSupportDataReducer, updateSupportDataReducer } from './help&support/reducers';
+import {
+    getNotificationDataReducer,
+    createNotificationDataReducer,
+    updateNotificationDataReducer,
+    getNotificationByAdminReducer,
+} from './notification/reducers';
+import { getComissionDataReducer, createComissionDataReducer, updateComissionDataReducer } from './commision/reducers';
+import { getPaidAuctionDataReducer, getNonPaidAuctionDataReducer } from './transactions/reducer';
+import { getTicketsReducer, createTicketReducer, updateTicketReducer, getChatByIdReducer } from './support/reducers';
+import {
+    getBidHandlerReducer,
+    postBidHandlerReducer,
+    deleteBidHandlerReducer,
+    editBidHandlerReducer,
+} from './bidHandler/reducer';
+import { purchaseOrderForAdminReducer } from './Buyers/reducer';
+import { getAllStatesReducer,getCitiesByIdReducer,createLocationReducer,updateCityReducer } from './location/reducers';
+export default combineReducers({
     Auth,
     Layout,
-    EmployeeList,
-    EmployeeCreate,
-    EmployeeUpdate,
-    EmployeeDetails,
-    StoreList,
-    StoreCreate,
-    StoreDetails,
-    StoreUpdate,
-    OrderList,
-    PackageList,
-    AssignedPackageList,
-    AssignPackageCreate,
-    AdminProfile,
-    SmsAndEmail,
-    BrandList,
-    BrandCreate,
-    BrandUpdate,
-    ServiceCategoryList,
-    ServiceCategoryUpdate,
-    DefectList,
-    DefectCreate,
-    DefectUpdate,
-    AssignedPackageList, AssignPackageCreate
-}));
+    dashboardDataReducer,
+    categoryDataReducer,
+    subCategoryDataReducer,
+    createCategoryDataReducer,
+    updatecategoryDataReducer,
+    deletecategoryDataReducer,
+    productDataReducer,
+    createProductDataReducer,
+    updateProductDataReducer,
+    deleteProductDataReducer,
+    faqDataReducer,
+    createFaqDataReducer,
+    updateFaqDataReducer,
+    deleteFaqDataReducer,
+    userDataReducer,
+    leadDataReducer,
+    soldProductDataReducer,
+    getLiveBidDataReducer,
+    getOrderDataReducer,
+    enquiryDataReducer,
+    getSupportDataReducer,
+    updateSupportDataReducer,
+    getNotificationDataReducer,
+    getNotificationByAdminReducer,
+    createNotificationDataReducer,
+    updateNotificationDataReducer,
+    getComissionDataReducer,
+    createComissionDataReducer,
+    updateComissionDataReducer,
+    getPaidAuctionDataReducer,
+    getNonPaidAuctionDataReducer,
+    getRecentRegistrationsForDashboardReducer,
+    specificProductDataReducer,
+    getTicketsReducer,
+    createTicketReducer,
+    updateTicketReducer,
+    getChatByIdReducer,
+    getBidHandlerReducer,
+    categoryAllDataReducer,
+    postBidHandlerReducer,
+    editBidHandlerReducer,
+    createSubCategoryDataReducer,
+    purchaseOrderForAdminReducer,
+    getAllStatesReducer,getCitiesByIdReducer,createLocationReducer,updateCityReducer,
+});

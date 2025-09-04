@@ -19,7 +19,7 @@ const LeftSideBarTheme = ({
             <h5 className="mt-4">Left Sidebar Color</h5>
             <hr className="mt-1" />
 
-            <Form.Check className="form-check form-switch mb-1">
+            {/* <Form.Check className="form-check form-switch mb-1">
                 <Form.Check.Input
                     type="radio"
                     name="theme"
@@ -29,7 +29,7 @@ const LeftSideBarTheme = ({
                     checked={leftSideBarTheme === layoutConstants.LEFT_SIDEBAR_THEME_DEFAULT}
                 />
                 <Form.Check.Label htmlFor="brand-check">Default</Form.Check.Label>
-            </Form.Check>
+            </Form.Check> */}
 
             <Form.Check className="form-check form-switch mb-1">
                 <Form.Check.Input

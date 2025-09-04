@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import Routes from './routes/Routes';
+import './index.css'
 
 // setup fake backend
 import { configureFakeBackend } from './helpers';
@@ -14,7 +15,7 @@ import './assets/scss/Saas.scss';
 // import './assets/scss/Modern.scss';
 
 // For Creative demo import Creative.scss
-// import './assets/scss/Creative.scss';
+import './assets/scss/Creative.scss';
 
 // configure fake backend
 configureFakeBackend();

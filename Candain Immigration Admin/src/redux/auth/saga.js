@@ -12,40 +12,29 @@ import {
 import { APICore, setAuthorization } from '../../helpers/api/apiCore';
 import { authApiResponseSuccess, authApiResponseError } from './actions';
 import { AuthActionTypes } from './constants';
-import * as ENCRYPT from '../../utils/Encrypt';
 
 const api = new APICore();
 
 /**
  * Login the user
- * @param {*} payload - username and password
+ * @param {*} payload - email and password
+ * 
  */
-
-
-function* login({ payload: { username, password, role } }) {
-    localStorage.setItem("X-Platform", role.toUpperCase())
+function* login({ payload: { email, password } }) {
     try {
-        const encryptPass = ENCRYPT.encryptedPassword(role, password);
-        const response = yield call(loginApi, { username, password: encryptPass, role });
-        const data = response.data.data;
-        if (!response.data.status) {
-            throw 'Invalid Credentials';
-        }
-        const user = {
-            id: 1,
-            username: data.details.username,
-            password: encryptPass,
-            firstName: 'firstname',
-            lastName: 'User',
-            role: 'Admin',
-            token: data.access_token,
+        const response = yield call(loginApi, { email, password });
+        const user = response?.data;
+        let userData = {
+            id: user?.data?._id,
+            name: user?.data?.name,
+            email: user?.data?.email,
+            role: user?.data?.role,
+            token: user?.token,
         };
-        localStorage.setItem("X-User-ID", data.details.id)
-        localStorage.setItem("token", 'Bearer ' + data.access_token)
         // NOTE - You can change this according to response format from your api
-        api.setLoggedInUser(user);
-        setAuthorization(user['token']);
-        yield put(authApiResponseSuccess(AuthActionTypes.LOGIN_USER, user));
+        api.setLoggedInUser(userData);
+        setAuthorization(user?.token);
+        yield put(authApiResponseSuccess(AuthActionTypes.LOGIN_USER, userData));
     } catch (error) {
         yield put(authApiResponseError(AuthActionTypes.LOGIN_USER, error));
         api.setLoggedInUser(null);
@@ -81,9 +70,9 @@ function* signup({ payload: { fullname, email, password } }) {
     }
 }
 
-function* forgotPassword({ payload: { username } }) {
+function* forgotPassword({ payload: { email } }) {
     try {
-        const response = yield call(forgotPasswordApi, { username });
+        const response = yield call(forgotPasswordApi, { email });
         yield put(authApiResponseSuccess(AuthActionTypes.FORGOT_PASSWORD, response.data));
     } catch (error) {
         yield put(authApiResponseError(AuthActionTypes.FORGOT_PASSWORD, error));

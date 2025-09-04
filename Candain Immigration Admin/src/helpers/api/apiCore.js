@@ -1,72 +1,58 @@
+import jwtDecode from 'jwt-decode';
 import axios from 'axios';
-import dayjs from 'dayjs';
 
 import config from '../../config';
 
 // content type
-axios.defaults.headers.post['Content-Type'] = 'application/json';
-axios.defaults.headers.post['X-Date'] = dayjs(new Date()).format(`YYYY-MM-DD`).toString();
+// axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.baseURL = config.API_URL;
-
-axios.interceptors.request.use(function (config) {
-    config.headers['X-Platform'] = localStorage.getItem('X-Platform')
-    config.headers['Authorization'] = localStorage.getItem('token');
-    config.headers['X-User-ID'] = localStorage.getItem('X-User-ID');
-    console.log("INTERCEPTERS REQUEST :", config)
-    return config;
-}, function (error) {
-    // Do something with request error
-    return Promise.reject(error);
-});
-
 // intercepting to capture errors
+
 axios.interceptors.response.use(
-    (response) => {
-        console.log("INTERCEPTERS RESPONSE :", config)
-
-        return response;
-    },
+    (response) => response,
     (error) => {
-        // Any status codes that falls outside the range of 2xx cause this function to trigger
-        let message;
-
-        if (error && error.response && error.response.status === 404) {
-            // window.location.href = '/not-found';
-        } else if (error && error.response && error.response.status === 403) {
-            window.location.href = '/access-denied';
-        } else {
-            switch (error.response.status) {
-                case 401:
-                    message = 'Invalid credentials';
-                    break;
-                case 403:
-                    message = 'Access Forbidden';
-                    break;
-                case 404:
-                    message = 'Sorry! the data you are looking for could not be found';
-                    break;
-                default: {
-                    message =
-                        error.response && error.response.data ? error.response.data['message'] : error.message || error;
-                }
-            }
-            return Promise.reject(message);
+        if (!error.response) {
+            // Network errors or no response from server
+            return Promise.reject('Network error. Please check your internet connection.');
         }
+
+        const { status, data } = error.response;
+        let message = data?.message || 'An unexpected error occurred.';
+
+        switch (status) {
+            case 400:
+                console.error('Bad Request:', data);
+                break;
+            case 403:
+                // window.location.href = '/access-denied';
+                return;
+            case 404:
+                message = 'Sorry! The data you are looking for could not be found.';
+                break;
+            case 500:
+                message = 'Internal Server Error. Please try again later.';
+                break;
+            default:
+                console.error(`Error ${status}:`, data);
+        }
+
+        return Promise.reject(message);
     }
 );
 
-const AUTH_SESSION_KEY = 'hyper_user';
+const AUTH_SESSION_KEY = 'bmg_user';
 
 /**
  * Sets the default authorization
  * @param {*} token
  */
 const setAuthorization = (token) => {
-    if (token) axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+    // if (token) axios.defaults.headers.common['Authorization'] = 'JWT ' + token;
+    if (token) axios.defaults.headers.common['Authorization'] = `${token}`;
     else delete axios.defaults.headers.common['Authorization'];
 };
 
-const getUserFromSession = () => {
+export const getUserFromSession = () => {
     const user = sessionStorage.getItem(AUTH_SESSION_KEY);
     return user ? (typeof user == 'object' ? user : JSON.parse(user)) : null;
 };
@@ -79,8 +65,8 @@ class APICore {
         if (params) {
             var queryString = params
                 ? Object.keys(params)
-                    .map((key) => key + '=' + params[key])
-                    .join('&')
+                      .map((key) => key + '=' + params[key])
+                      .join('&')
                 : '';
             response = axios.get(`${url}?${queryString}`, params);
         } else {
@@ -94,8 +80,8 @@ class APICore {
         if (params) {
             var queryString = params
                 ? Object.keys(params)
-                    .map((key) => key + '=' + params[key])
-                    .join('&')
+                      .map((key) => key + '=' + params[key])
+                      .join('&')
                 : '';
             response = axios.get(`${url}?${queryString}`, { responseType: 'blob' });
         } else {
@@ -110,8 +96,8 @@ class APICore {
         if (params) {
             queryString = params
                 ? Object.keys(params)
-                    .map((key) => key + '=' + params[key])
-                    .join('&')
+                      .map((key) => key + '=' + params[key])
+                      .join('&')
                 : '';
         }
 
@@ -190,15 +176,18 @@ class APICore {
         if (!user || (user && !user.token)) {
             return false;
         }
-        return true
-        // const decoded = jwtDecode(user.token);
-        // const currentTime = Date.now() / 1000;
-        // if (decoded.exp < currentTime) {
-        //     console.warn('access token expired');
-        //     return false;
-        // } else {
-        //     return true;
-        // }
+        const decoded = jwtDecode(user.token);
+        const currentTime = Date.now() / 1000;
+        if (decoded.exp < currentTime) {
+            console.warn('Access token expired !');
+            alert('Your session has expired. Redirecting you to the login page.');
+            sessionStorage.removeItem(AUTH_SESSION_KEY);
+            localStorage.clear();
+            window.location.href = '/account/login';
+            return false;
+        } else {
+            return true;
+        }
     };
 
     setLoggedInUser = (session) => {

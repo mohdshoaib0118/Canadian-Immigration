@@ -23,22 +23,22 @@ const PageTitle = (props: PageTitleProps): React$Element<any> => {
                 <div className="page-title-box">
                     <div className="page-title-right">
                         <Breadcrumb listProps={{ className: 'm-0' }}>
-                            <Breadcrumb.Item href="/">Hyper</Breadcrumb.Item>
+                            <Breadcrumb.Item href="/"><span className='custom-color'>BMG</span></Breadcrumb.Item>
 
                             {props.breadCrumbItems.map((item, index) => {
                                 return item.active ? (
-                                    <Breadcrumb.Item active key={index}>
-                                        {item.label}
+                                    <Breadcrumb.Item active key={index} >
+                                        <span className='custom-color'>{item.label}</span>
                                     </Breadcrumb.Item>
                                 ) : (
-                                    <Breadcrumb.Item key={index} href={item.path}>
-                                        {item.label}
+                                    <Breadcrumb.Item key={index} href={item.path} >
+                                        <span className='custom-color'>{item.label}</span>
                                     </Breadcrumb.Item>
                                 );
                             })}
                         </Breadcrumb>
                     </div>
-                    <h4 className="page-title">{props.title}</h4>
+                    <h4 className="page-title custom-color">{props.title}</h4>
                 </div>
             </Col>
         </Row>
