@@ -36,7 +36,7 @@ body[data-leftbar-theme="dark"] .side-nav .menuitem-active:hover>a i {
 /* Hover effect for inactive items */
 li.side-nav-item:not(.menuitem-active):hover {
     font-weight: 700;
-    background-color: green !important;
+    background-color: #006AAB !important;
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
     color: white !important;
@@ -73,7 +73,7 @@ li.side-nav-item:not(.menuitem-active):hover {
 
 /* Parent active link background and white text */
 .side-nav .menuitem-active>a {
-    background-color: green !important;
+    background-color: #006AAB !important;
     color: white !important;
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
@@ -99,14 +99,14 @@ body[data-leftbar-theme="light"] .side-nav .side-nav-link:focus {
 }
 
 .body[data-leftbar-theme="light"][data-leftbar-compact-mode="condensed"] .side-nav .side-nav-item:hover .side-nav-link {
-    background-color: green !important;
+    background-color: #006AAB !important;
     color: white !important;
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
 }
 
 body[data-leftbar-theme=light][data-leftbar-compact-mode=condensed] .side-nav .side-nav-item:hover .side-nav-link {
-    background-color: green !important;
+    background-color: #006AAB !important;
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
 }
@@ -116,7 +116,7 @@ body[data-leftbar-theme=light][data-leftbar-compact-mode=condensed] .side-nav .s
 }
 
 .page-item.active .page-link {
-    background: green !important;
+    background: #006AAB !important;
 }
 
 .footer {

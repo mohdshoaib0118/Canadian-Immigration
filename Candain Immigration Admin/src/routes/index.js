@@ -21,33 +21,18 @@ const Register = React.lazy(() => import('../pages/account/Register'));
 const Confirm = React.lazy(() => import('../pages/account/Confirm'));
 const ForgetPassword = React.lazy(() => import('../pages/account/ForgetPassword'));
 const LockScreen = React.lazy(() => import('../pages/account/LockScreen'));
-const PageDetails = React.lazy(() => import('../pages/bmg/products/ProductDetails/ProductDetails'));
+
+// Canadian Dream Immigration pages
 const Dashboard = React.lazy(() => import('../pages/bmg/dashboard/Dashboard'));
-
-//BMG pages
-const AuctionLead = React.lazy(() => import('../pages/bmg/auctionLead/AuctionLead'));
-const Category = React.lazy(() => import('../pages/bmg/categories/Categories'));
-const Products = React.lazy(() => import('../pages/bmg/products/Products'));
-// const Buyer_Seller = React.lazy(() => import('../pages/bmg/buyer-seller/Buyer_Seller'));
-const Seller = React.lazy(() => import('../pages/bmg/Seller/Seller'));
-const Buyer = React.lazy(() => import('../pages/bmg/Buyer/Buyer'));
-const BuyerDetails = React.lazy(() => import('../pages/bmg/Buyer/BuyerDetails/BuyerDetails'));
-
 const Faq = React.lazy(() => import('../pages/bmg/faq/Faq'));
-const Orders = React.lazy(() => import('../pages/bmg/orders/Orders'));
+const Teams = React.lazy(() => import('../pages/bmg/teams/Teams'));
+const Services = React.lazy(() => import('../pages/bmg/services/Services'));
+const Blogs = React.lazy(() => import('../pages/bmg/blogs/Blogs'));
+const LatestNews = React.lazy(() => import('../pages/bmg/latestNews/LatestNews'));
 const Enquiry = React.lazy(() => import('../pages/bmg/enquiry/Enquiry'));
 const Notification = React.lazy(() => import('../pages/bmg/notification/Notification'));
-const Comission = React.lazy(() => import('../pages/bmg/comission/Comission'));
-const SoldProducts = React.lazy(() => import('../pages/bmg/soldProducts/SoldProducts'));
-const LiveBids = React.lazy(() => import('../pages/bmg/liveBids/LiveBidMonitoring'));
-const LiveBidsMonitoring = React.lazy(() => import('../pages/bmg/liveBids/liveBidsMonitoring/LiveBidsMonitoring'));
-const Transactions = React.lazy(() => import('../pages/bmg/transactions/Transactions'));
-const BidPercentage = React.lazy(() => import('../pages/bmg/bidPercentage/BidPercentage'));
-const UserDetails = React.lazy(() => import('../pages/bmg/UserDetails/UserDetails'));
-const HelpAndSupport = React.lazy(() => import('../pages/bmg/help&support/Helpandsupport'));
-const TicketDetails = React.lazy(() => import('../pages/bmg/help&support/Tickets'));
-const States = React.lazy(() => import('../pages/bmg/location/States'));
-const Cities = React.lazy(() => import('../pages/bmg/location/Cities'));
+
+
 
 // error handlers
 const ErrorPageNotFound = React.lazy(() => import('../pages/error/PageNotFound'));
@@ -130,55 +115,31 @@ const AllRoutes = () => {
             element: <PrivateRoute roles={'admin'} component={Layout} />,
             children: [
                 {
-                    path: 'bmg',
+                    path: 'admin',
                     children: [
                         {
                             path: 'dashboard',
                             element: <LoadComponent component={Dashboard} />,
                         },
                         {
-                            path: 'leads',
-                            element: <LoadComponent component={AuctionLead} />,
-                        },
-                        {
-                            path: 'categories',
-                            element: <LoadComponent component={Category} />,
-                        },
-                        {
-                            path: 'items',
-                            element: <LoadComponent component={Products} />,
-                        },
-                        {
-                            path: 'items/:id',
-                            element: <LoadComponent component={PageDetails} />,
-                        },
-                        // {
-                        //     path: 'users',
-                        //     element: <LoadComponent component={Buyer_Seller} />,
-                        // },
-                        {
-                            path: 'buyers',
-                            element: <LoadComponent component={Buyer} />,
-                        },
-                        {
-                            path: 'buyers/order-history/:id',
-                            element: <LoadComponent component={BuyerDetails} />,
-                        },
-                        {
-                            path: 'sellers',
-                            element: <LoadComponent component={Seller} />,
-                        },
-                        {
-                            path: 'users/:id',
-                            element: <LoadComponent component={UserDetails} />,
-                        },
-                        {
                             path: 'faq',
                             element: <LoadComponent component={Faq} />,
                         },
                         {
-                            path: 'orders',
-                            element: <LoadComponent component={Orders} />,
+                            path: 'teams',
+                            element: <LoadComponent component={Teams} />,
+                        },
+                        {
+                            path: 'services',
+                            element: <LoadComponent component={Services} />,
+                        },
+                        {
+                            path: 'blogs',
+                            element: <LoadComponent component={Blogs} />,
+                        },
+                        {
+                            path: 'latest-news',
+                            element: <LoadComponent component={LatestNews} />,
                         },
                         {
                             path: 'enquiry',
@@ -188,46 +149,8 @@ const AllRoutes = () => {
                             path: 'notification',
                             element: <LoadComponent component={Notification} />,
                         },
-                        {
-                            path: 'platform-charges',
-                            element: <LoadComponent component={Comission} />,
-                        },
-                        {
-                            path: 'sold-items',
-                            element: <LoadComponent component={SoldProducts} />,
-                        },
-                        {
-                            path: 'live-bids',
-                            element: <LoadComponent component={LiveBids} />,
-                        },
-                        {
-                            path: 'live-bids/live-monitoring/:id',
-                            element: <LoadComponent component={LiveBidsMonitoring} />,
-                        },
-                        {
-                            path: 'transactions',
-                            element: <LoadComponent component={Transactions} />,
-                        },
-                        {
-                            path: 'help-support',
-                            element: <LoadComponent component={HelpAndSupport} />,
-                        },
-                        {
-                            path: 'ticket/:id',
-                            element: <LoadComponent component={TicketDetails} />,
-                        },
-                        {
-                            path: 'bidPercentage',
-                            element: <LoadComponent component={BidPercentage} />,
-                        },
-                        {
-                            path: 'location',
-                            element: <LoadComponent component={States} />,
-                        },
-                        {
-                            path: 'cities/:id',
-                            element: <LoadComponent component={Cities} />,
-                        },
+
+
                     ],
                 },
             ],

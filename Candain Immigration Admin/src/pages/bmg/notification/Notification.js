@@ -81,82 +81,95 @@ const Notification = () => {
     return (
         <>
             <PageTitle
-                breadCrumbItems={[{ label: 'Notification', path: '/bmg/notification', active: true }]}
+                breadCrumbItems={[{ label: 'Notification', path: '/admin/notification', active: true }]}
                 title="Notification Management"
             />
 
             <Row>
                 <Col xs={12}>
-                    <Card
-                        style={{
-                            boxShadow:
-                                'rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset',
-                        }}>
-                        <Card.Body>
-                            <div className="d-flex justify-content-between align-items-center mb-3">
-                                <span className="px-3 py-1 bg-dark text-light rounded">
-                                    Total Notification's: {TotalRecords || 0}
-                                </span>
-                                <div className="d-flex">
-                                    {/* <input
-                                        type="text"
-                                        className="form-control w-auto me-2"
-                                        placeholder="Search..."
-                                        value={search}
-                                        onChange={(e) => setSearch(e.target.value)}
-                                    />
-                                    {search && (
-                                        <i
-                                            className="mdi mdi-backspace-outline text-danger fs-3 me-2"
-                                            onClick={() => setSearch('')}
-                                            style={{ cursor: 'pointer' }}></i>
-                                    )} */}
-                                    <Button variant="success" onClick={() => handleNotificationModal('Add')}>
-                                        <i className="mdi mdi-plus-circle"></i> Add
-                                    </Button>
+                    <Card className="border-0 shadow-lg" style={{ borderRadius: '15px' }}>
+                        <Card.Header className="bg-gradient border-0 py-4" style={{ background: 'linear-gradient(135deg, #006AAB 0%, #004d7a 100%)', borderRadius: '15px 15px 0 0' }}>
+                            <div className="d-flex justify-content-between align-items-center">
+                                <div className="d-flex align-items-center">
+                                    <div className="bg-white bg-opacity-20 rounded-circle p-3 me-3">
+                                        <i className="mdi mdi-bell text-muted" style={{ fontSize: '1.5rem' }}></i>
+                                    </div>
+                                    <div>
+                                        <h4 className="text-muted mb-1 fw-bold">Notification Management</h4>
+                                        <p className="text-muted-50 mb-0">Manage system notifications and alerts</p>
+                                    </div>
                                 </div>
+                                <div className="bg-white bg-opacity-20 rounded-pill px-4 py-2">
+                                    <span className="text-muted fw-semibold">
+                                        <i className="mdi mdi-message-alert me-2"></i>
+                                        {TotalRecords || 0} Notifications
+                                    </span>
+                                </div>
+                            </div>
+                        </Card.Header>
+                        <Card.Body className="p-4">
+                            <div className="d-flex justify-content-end align-items-center mb-4">
+                                <Button
+                                    className="px-4 py-2 fw-semibold"
+                                    style={{
+                                        backgroundColor: '#006AAB',
+                                        borderColor: '#006AAB',
+                                        borderRadius: '25px',
+                                        boxShadow: '0 4px 15px rgba(0, 106, 171, 0.3)'
+                                    }}
+                                    onClick={() => handleNotificationModal('Add')}
+                                >
+                                    <i className="mdi mdi-plus-circle me-2"></i>Create Notification
+                                </Button>
                             </div>
 
                             {NotificationLoading ? (
                                 <Loading />
                             ) : NotificationData.length > 0 ? (
                                 <div className="table-responsive">
-                                    <Table bordered hover className="bg-white text-start">
-                                        <thead>
-                                            <tr className="text-nowrap text-secondary">
-                                                <th>
-                                                    <i className="mdi mdi-merge"></i>
-                                                </th>
-                                                <th>Message</th>
-                                                <th>Type</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
+                                    <Table className="mb-0 table-hover" style={{ borderRadius: '10px', overflow: 'hidden' }}>
+                                        <thead style={{ backgroundColor: '#f8f9fa' }}>
+                                            <tr>
+                                                <th className="border-0 py-3 text-muted fw-semibold">#</th>
+                                                <th className="border-0 py-3 text-muted fw-semibold">Message</th>
+                                                <th className="border-0 py-3 text-muted fw-semibold">Type</th>
+                                                <th className="border-0 py-3 text-muted fw-semibold">Status</th>
+                                                <th className="border-0 py-3 text-muted fw-semibold text-center">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {NotificationData.map((data, index) => (
-                                                <tr key={data._id || index}>
-                                                    <td>{(pageIndex - 1) * pageSize + index + 1}</td>
-                                                    <td className="p-1 m-0">
-                                                        {' '}
-                                                        <span
-                                                            dangerouslySetInnerHTML={{
-                                                                __html: data?.message || 'N/A',
-                                                            }}
-                                                        />
+                                                <tr key={data._id || index} className="border-bottom">
+                                                    <td className="py-3 align-middle">
+                                                        <span className="badge bg-light text-dark rounded-pill">{(pageIndex - 1) * pageSize + index + 1}</span>
                                                     </td>
-                                                    <td className="text-capitalize">{data?.type}</td>
-                                                    <td>
-                                                        <span
-                                                            className={`badge ${data?.status ? 'bg-success' : 'bg-danger'
-                                                                } px-2 py-1`}>
+                                                    <td className="py-3 align-middle">
+                                                        <div className="text-dark" style={{ maxWidth: '400px' }}>
+                                                            <span dangerouslySetInnerHTML={{ __html: data?.message || 'No message' }} />
+                                                        </div>
+                                                        <small className="text-muted">ID: {data?._id?.slice(-6) || 'N/A'}</small>
+                                                    </td>
+                                                    <td className="py-3 align-middle">
+                                                        <span className="badge bg-info text-muted px-3 py-2 text-capitalize" style={{ borderRadius: '20px' }}>
+                                                            <i className="mdi mdi-tag me-1"></i>
+                                                            {data?.type || 'General'}
+                                                        </span>
+                                                    </td>
+                                                    <td className="py-3 align-middle">
+                                                        <span className={`badge px-3 py-2 ${data?.status ? 'bg-success' : 'bg-warning'}`} style={{ borderRadius: '20px' }}>
+                                                            <i className={`mdi ${data?.status ? 'mdi-check-circle' : 'mdi-pause-circle'} me-1`}></i>
                                                             {data?.status ? 'Active' : 'Inactive'}
                                                         </span>
                                                     </td>
-                                                    <td>
-                                                        <i className="mdi mdi-square-edit-outline fs-4 text-primary"
-                                                            style={{ cursor: 'pointer' }}
-                                                            onClick={() => handleNotificationModal('Edit', data)}></i>
+                                                    <td className="py-3 align-middle text-center">
+                                                        <Button
+                                                            size="sm"
+                                                            variant="outline-primary"
+                                                            onClick={() => handleNotificationModal('Edit', data)}
+                                                            title="Edit Notification"
+                                                        >
+                                                            <i className="mdi mdi-pencil"></i>
+                                                        </Button>
                                                     </td>
                                                 </tr>
                                             ))}
@@ -164,10 +177,19 @@ const Notification = () => {
                                     </Table>
                                 </div>
                             ) : (
-                                <div className="text-center py-4">
-                                    <code className="fs-5 text-muted">
-                                        No Notification's found. Add some to display.
-                                    </code>
+                                <div className="text-center py-5">
+                                    <div className="mb-4">
+                                        <i className="mdi mdi-bell-outline text-muted" style={{ fontSize: '4rem' }}></i>
+                                    </div>
+                                    <h5 className="text-muted mb-3">No Notifications Found</h5>
+                                    <p className="text-muted mb-4">Create notifications to keep users informed</p>
+                                    <Button
+                                        className="px-4 py-2"
+                                        style={{ backgroundColor: '#006AAB', borderColor: '#006AAB', borderRadius: '25px' }}
+                                        onClick={() => handleNotificationModal('Add')}
+                                    >
+                                        <i className="mdi mdi-plus-circle me-2"></i>Create First Notification
+                                    </Button>
                                 </div>
                             )}
                             {TotalRecords > 20 && (

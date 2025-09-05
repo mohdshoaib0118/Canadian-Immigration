@@ -2,7 +2,7 @@
 import { all, fork, put, takeEvery, call, takeLatest } from 'redux-saga/effects';
 import { FaqActionTypes } from './constants';
 
-import { faqData, createFaqData, updateFaqData, deleteFaqData } from './api';
+import { faqApi } from './api';
 import ToastContainer from '../../helpers/toast/ToastContainer';
 /**
  * Login the user
@@ -16,7 +16,7 @@ function* getFaqFunction(data) {
             type: FaqActionTypes.FAQ_DATA_LOADING,
             payload: {},
         });
-        const response = yield call(faqData, data);
+        const response = yield call(faqApi.getAllFaqs, data.data);
         if (response?.status === 200) {
             yield put({
                 type: FaqActionTypes.FAQ_DATA_SUCCESS,
@@ -42,13 +42,17 @@ function* createFaqFunction(data) {
             type: FaqActionTypes.CREATE_FAQ_LOADING,
             payload: {},
         });
-        const response = yield call(createFaqData, data);
-        if (response.data.status) {
+        const response = yield call(faqApi.addFaq, data.data);
+        if (response?.status === 200) {
             yield put({
                 type: FaqActionTypes.CREATE_FAQ_SUCCESS,
                 payload: { ...response.data },
             });
-            ToastContainer(response?.data?.data?.message, 'success');
+            yield put({
+                type: FaqActionTypes.FAQ_DATA_FIRST,
+                data: { search: '', limit: 20, page: 1 }
+            });
+            ToastContainer('FAQ created successfully', 'success');
         } else {
             yield put({
                 type: FaqActionTypes.CREATE_FAQ_ERROR,
@@ -70,13 +74,17 @@ function* updateFaqFunction(payload) {
             type: FaqActionTypes.UPDATE_FAQ_DATA_LOADING,
         });
 
-        const response = yield call(updateFaqData, payload);
-        if (response && response.data) {
+        const response = yield call(faqApi.editFaq, payload.data);
+        if (response?.status === 200) {
             yield put({
                 type: FaqActionTypes.UPDATE_FAQ_DATA_SUCCESS,
                 payload: response.data,
             });
-            ToastContainer(response?.data?.message, 'success');
+            yield put({
+                type: FaqActionTypes.FAQ_DATA_FIRST,
+                data: { search: '', limit: 20, page: 1 }
+            });
+            ToastContainer('FAQ updated successfully', 'success');
         } else {
             yield put({
                 type: FaqActionTypes.UPDATE_FAQ_DATA_ERROR,
@@ -98,14 +106,18 @@ function* deleteFaqFunction(payload) {
             type: FaqActionTypes.DELETE_FAQ_DATA_LOADING,
         });
 
-        const response = yield call(deleteFaqData, payload);
+        const response = yield call(faqApi.deleteFaq, { _id: payload.data });
 
-        if (response && response.data) {
+        if (response?.status === 200) {
             yield put({
                 type: FaqActionTypes.DELETE_FAQ_DATA_SUCCESS,
                 payload: response.data,
             });
-
+            yield put({
+                type: FaqActionTypes.FAQ_DATA_FIRST,
+                data: { search: '', limit: 20, page: 1 }
+            });
+            ToastContainer('FAQ deleted successfully', 'success');
             yield put({
                 type: FaqActionTypes.DELETE_FAQ_DATA_RESET,
             });

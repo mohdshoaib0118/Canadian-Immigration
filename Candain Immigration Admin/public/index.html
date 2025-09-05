@@ -31,7 +31,56 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>BMG Admin</title>
+    <title>Canadian Dream Immigration Admin</title>
+    <link rel="stylesheet" href="%PUBLIC_URL%/color-override.css">
+    <style>
+        :root {
+            --bs-primary: #006AAB !important;
+            --bs-success: #006AAB !important;
+            --primary: #006AAB !important;
+            --success: #006AAB !important;
+        }
+        .btn-primary, .btn-success { background-color: #006AAB !important; border-color: #006AAB !important; }
+        .side-nav .menuitem-active > .side-nav-link, .side-nav .side-nav-link:hover, .side-nav-item:hover > .side-nav-link { background-color: #006AAB !important; color: white !important; background: #006AAB !important; }
+        
+        /* EMERGENCY GREEN OVERRIDE - MAXIMUM SPECIFICITY */
+        .leftside-menu .side-nav .side-nav-item:hover .side-nav-link,
+        .leftside-menu .side-nav .side-nav-item:hover > .side-nav-link,
+        .leftside-menu .side-nav .side-nav-item .side-nav-link:hover,
+        .leftside-menu .side-nav .side-nav-item .side-nav-link:focus,
+        .leftside-menu .side-nav .side-nav-item .side-nav-link:active,
+        .leftside-menu .side-nav .side-nav-item.menuitem-active .side-nav-link,
+        .leftside-menu .side-nav .side-nav-item.menuitem-active > .side-nav-link,
+        .leftside-menu .side-nav .side-nav-item.menuitem-active .side-nav-link:hover,
+        .leftside-menu .side-nav .side-nav-item.menuitem-active .side-nav-link:focus,
+        .leftside-menu .side-nav .side-nav-item.menuitem-active .side-nav-link:active,
+        body .leftside-menu .side-nav .side-nav-item:hover .side-nav-link,
+        body .leftside-menu .side-nav .side-nav-item .side-nav-link:hover,
+        html body .leftside-menu .side-nav .side-nav-item:hover .side-nav-link,
+        html body .leftside-menu .side-nav .side-nav-item .side-nav-link:hover {
+            background-color: #006AAB !important;
+            background: #006AAB !important;
+            color: white !important;
+        }
+        
+        /* EXACT CLASS OVERRIDE */
+        li.side-nav-item:not(.menuitem-active):hover {
+            background-color: #006AAB !important;
+            color: white !important;
+        }
+        
+        /* OVERRIDE ANY BOOTSTRAP PRIMARY/SUCCESS COLORS */
+        .leftside-menu .side-nav .side-nav-item:hover .side-nav-link[style*="primary"],
+        .leftside-menu .side-nav .side-nav-item:hover .side-nav-link[style*="success"],
+        .leftside-menu .side-nav .side-nav-item:hover .side-nav-link[style*="green"],
+        .leftside-menu .side-nav .side-nav-item:hover .side-nav-link[class*="primary"],
+        .leftside-menu .side-nav .side-nav-item:hover .side-nav-link[class*="success"],
+        .leftside-menu .side-nav .side-nav-item:hover .side-nav-link[class*="green"] {
+            background-color: #006AAB !important;
+            background: #006AAB !important;
+            color: white !important;
+        }
+    </style>
 </head>
 
 <body>
