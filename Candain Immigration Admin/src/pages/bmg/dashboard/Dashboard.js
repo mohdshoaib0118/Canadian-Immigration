@@ -142,8 +142,8 @@ const Dashboard = () => {
 
             <PageTitle
                 breadCrumbItems={[
-                    { label: 'BMG Dashboard', path: '/bmg/dashboard' },
-                    { label: 'Dashboard', path: '/bmg/dashboard', active: true },
+                    { label: 'Admin Dashboard', path: '/admin/dashboard' },
+                    { label: 'Dashboard', path: '/admin/dashboard', active: true },
                 ]}
                 title={'Dashboard'}
             />

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
-import { addTicketsAction, resetTicketsDataAction } from '../../redux/actions';
+// import { addTicketsAction, resetTicketsDataAction } from '../../redux/actions';
 import { ButtonLoading } from '../loader/Loading';
 
 const HelpSupportModal = ({ show, hide, file }) => {
@@ -13,7 +13,7 @@ const HelpSupportModal = ({ show, hide, file }) => {
     const [issueType, setIssueType] = useState('');
     const [priorityType, setPriorityType] = useState('Medium');
     const store = useSelector((state) => state);
-    const createStatus = store?.createTicketReducer?.supportData?.status;
+    const createStatus = null; // store?.createTicketReducer?.supportData?.status;
     const user = store?.Auth?.user;
 
     const getCurrentPageInfo = () => {
@@ -80,7 +80,8 @@ const HelpSupportModal = ({ show, hide, file }) => {
         formData.append('userId', user?.id);
         formData.append('sellerMail', user?.email);
 
-        dispatch(addTicketsAction(formData));
+        console.log('Submit ticket:', formData);
+        // dispatch(addTicketsAction(formData));
     };
 
     const resetForm = () => {
@@ -97,7 +98,7 @@ const HelpSupportModal = ({ show, hide, file }) => {
     useEffect(() => {
         if (createStatus === 200) {
             close();
-            dispatch(resetTicketsDataAction());
+            // dispatch(resetTicketsDataAction());
         }
     }, [createStatus]);
 
@@ -243,7 +244,7 @@ const HelpSupportModal = ({ show, hide, file }) => {
                                 variant="outline-secondary"
                                 size="sm"
                                 onClick={close}
-                                disabled={store?.createTicketReducer?.loading}
+                                disabled={false}
                             >
                                 Cancel
                             </Button>
@@ -251,16 +252,12 @@ const HelpSupportModal = ({ show, hide, file }) => {
                                 variant="success"
                                 size="sm"
                                 type="submit"
-                                disabled={store?.createTicketReducer?.loading}
+                                disabled={false}
                             >
-                                {store?.createTicketReducer?.loading ? (
-                                    <div style={{width: '91px' }}><ButtonLoading /></div>
-                                ) : (
-                                    <>
-                                        <i className="mdi mdi-send me-1"></i>
-                                        Submit
-                                    </>
-                                )}
+                                <>
+                                    <i className="mdi mdi-send me-1"></i>
+                                    Submit
+                                </>
                             </Button>
                         </div>
                     </Form>

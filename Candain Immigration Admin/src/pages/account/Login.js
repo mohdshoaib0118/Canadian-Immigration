@@ -112,7 +112,7 @@ const Login = (): React$Element<any> => {
                     </FormInput>
 
                     <div className="mb-3 mb-0 text-center">
-                        <Button style={{ backgroundColor: '#008003' }} className='shadow-none border-0' type="submit" disabled={loading}>
+                        <Button style={{ backgroundColor: '#006AAB' }} className='shadow-none border-0' type="submit" disabled={loading}>
                             {!loading ? (<>{t('Log In')}</>) : (<ButtonLoading />)}
                         </Button>
                     </div>

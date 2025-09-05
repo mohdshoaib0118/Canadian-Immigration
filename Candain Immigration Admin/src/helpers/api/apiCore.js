@@ -131,17 +131,22 @@ class APICore {
     /**
      * Deletes data
      */
-    delete = (url) => {
-        return axios.delete(url);
+    delete = (url, data) => {
+        return axios.delete(url, { data });
     };
 
     /**
      * post given data to url with file
      */
     createWithFile = (url, data) => {
-        const formData = new FormData();
-        for (const k in data) {
-            formData.append(k, data[k]);
+        let formData;
+        if (data instanceof FormData) {
+            formData = data;
+        } else {
+            formData = new FormData();
+            for (const k in data) {
+                formData.append(k, data[k]);
+            }
         }
 
         const config = {
@@ -157,9 +162,14 @@ class APICore {
      * post given data to url with file
      */
     updateWithFile = (url, data) => {
-        const formData = new FormData();
-        for (const k in data) {
-            formData.append(k, data[k]);
+        let formData;
+        if (data instanceof FormData) {
+            formData = data;
+        } else {
+            formData = new FormData();
+            for (const k in data) {
+                formData.append(k, data[k]);
+            }
         }
 
         const config = {
