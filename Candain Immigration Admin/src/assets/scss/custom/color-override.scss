@@ -1,0 +1,464 @@
+/* COMPREHENSIVE COLOR OVERRIDE - REMOVE ALL GREEN COLORS */
+/* Replace with #006AAB everywhere */
+
+/* CSS Variables Override - HIGHEST PRIORITY */
+:root {
+  --bs-primary: #006AAB !important;
+  --bs-primary-rgb: 0, 106, 171 !important;
+  --bs-success: #006AAB !important;
+  --bs-success-rgb: 0, 106, 171 !important;
+  --bs-green: #006AAB !important;
+  --primary: #006AAB !important;
+  --success: #006AAB !important;
+  --green: #006AAB !important;
+}
+
+/* BUTTONS - ALL VARIANTS */
+.btn-primary,
+.btn-primary:not(:disabled):not(.disabled),
+.btn-primary.disabled,
+.btn-primary:disabled,
+.btn-success,
+.btn-success:not(:disabled):not(.disabled),
+.btn-success.disabled,
+.btn-success:disabled {
+  background-color: #006AAB !important;
+  border-color: #006AAB !important;
+  color: white !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary.focus,
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle,
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.active,
+.btn-success.focus,
+.btn-success:not(:disabled):not(.disabled):active,
+.btn-success:not(:disabled):not(.disabled).active,
+.show > .btn-success.dropdown-toggle {
+  background-color: #005a96 !important;
+  border-color: #005a96 !important;
+  color: white !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 106, 171, 0.5) !important;
+}
+
+.btn-outline-primary,
+.btn-outline-success {
+  color: #006AAB !important;
+  border-color: #006AAB !important;
+  background-color: transparent !important;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active,
+.btn-outline-primary.active,
+.btn-outline-success:hover,
+.btn-outline-success:focus,
+.btn-outline-success:active,
+.btn-outline-success.active {
+  background-color: #006AAB !important;
+  border-color: #006AAB !important;
+  color: white !important;
+}
+
+/* BACKGROUND COLORS */
+.bg-primary,
+.bg-success,
+.bg-green {
+  background-color: #006AAB !important;
+}
+
+/* BADGE COLORS */
+.badge.bg-primary,
+.badge.bg-success,
+.badge.bg-green {
+  background-color: #006AAB !important;
+  color: white !important;
+}
+
+/* TEXT COLORS */
+.text-primary,
+.text-success,
+.text-green {
+  color: #006AAB !important;
+}
+
+/* BORDER COLORS */
+.border-primary,
+.border-success,
+.border-green {
+  border-color: #006AAB !important;
+}
+
+/* ALERT COLORS */
+.alert-primary,
+.alert-success {
+  background-color: rgba(0, 106, 171, 0.1) !important;
+  border-color: #006AAB !important;
+  color: #006AAB !important;
+}
+
+/* FORM CONTROLS */
+.form-control:focus,
+.form-select:focus {
+  border-color: #006AAB !important;
+  box-shadow: 0 0 0 0.25rem rgba(0, 106, 171, 0.25) !important;
+}
+
+.form-check-input:checked {
+  background-color: #006AAB !important;
+  border-color: #006AAB !important;
+}
+
+.form-check-input:focus {
+  border-color: #006AAB !important;
+  box-shadow: 0 0 0 0.25rem rgba(0, 106, 171, 0.25) !important;
+}
+
+.is-valid,
+.was-validated .form-control:valid,
+.was-validated .form-select:valid {
+  border-color: #006AAB !important;
+}
+
+.valid-feedback {
+  color: #006AAB !important;
+}
+
+/* LINKS */
+a,
+a:link {
+  color: #006AAB !important;
+}
+
+a:hover,
+a:focus,
+a:active {
+  color: #005a96 !important;
+}
+
+/* PROGRESS BARS */
+.progress-bar,
+.progress-bar-primary,
+.progress-bar-success {
+  background-color: #006AAB !important;
+}
+
+/* PAGINATION */
+.page-link {
+  color: #006AAB !important;
+}
+
+.page-item.active .page-link {
+  background-color: #006AAB !important;
+  border-color: #006AAB !important;
+  color: white !important;
+}
+
+.page-link:hover,
+.page-link:focus {
+  color: #005a96 !important;
+  background-color: rgba(0, 106, 171, 0.1) !important;
+  border-color: #006AAB !important;
+}
+
+/* DROPDOWN */
+.dropdown-item:active,
+.dropdown-item.active {
+  background-color: #006AAB !important;
+  color: white !important;
+}
+
+/* NAVIGATION */
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background-color: #006AAB !important;
+  color: white !important;
+}
+
+/* SIDEBAR - COMPREHENSIVE COVERAGE */
+.leftside-menu .sidebar-nav .nav-link.active,
+.leftside-menu .sidebar-nav .nav-link:hover,
+.sidebar-nav .nav-link.active,
+.sidebar-nav .nav-link:hover,
+.left-side-menu .sidebar-nav .nav-link.active,
+.left-side-menu .sidebar-nav .nav-link:hover,
+.side-nav .nav-link.active,
+.side-nav .nav-link:hover,
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:hover,
+.metismenu .nav-link.active,
+.metismenu .nav-link:hover,
+.nav-second-level .nav-link.active,
+.nav-second-level .nav-link:hover {
+  background-color: #006AAB !important;
+  color: white !important;
+}
+
+/* SIDEBAR MENU ITEMS - ALL STATES */
+.side-nav .menuitem-active > a,
+.side-nav .menuitem-active > a:hover,
+.side-nav .menuitem-active > a:focus,
+.side-nav .menuitem-active > .side-nav-link,
+.side-nav .menuitem-active > .side-nav-link:hover,
+.side-nav .menuitem-active > .side-nav-link:focus,
+.leftside-menu .menuitem-active > a,
+.leftside-menu .menuitem-active > a:hover,
+.leftside-menu .menuitem-active > a:focus,
+.leftside-menu .menuitem-active > .side-nav-link,
+.leftside-menu .menuitem-active > .side-nav-link:hover,
+.leftside-menu .menuitem-active > .side-nav-link:focus,
+.side-nav-item.menuitem-active > .side-nav-link,
+.side-nav-item.menuitem-active > .side-nav-link:hover,
+.side-nav-item.menuitem-active > .side-nav-link:focus,
+.side-nav-item.menuitem-active > .side-nav-link:active {
+  background-color: #006AAB !important;
+  color: white !important;
+}
+
+/* SIDEBAR HOVER STATES - COMPREHENSIVE */
+.side-nav .side-nav-link:hover,
+.side-nav .side-nav-link:focus,
+.side-nav .side-nav-link:active,
+.side-nav-item:hover > .side-nav-link,
+.side-nav-item:focus > .side-nav-link,
+.leftside-menu .side-nav .side-nav-link:hover,
+.leftside-menu .side-nav .side-nav-link:focus,
+.leftside-menu .side-nav-item:hover > .side-nav-link,
+.leftside-menu .side-nav-item:focus > .side-nav-link {
+  background-color: #006AAB !important;
+  color: white !important;
+}
+
+/* FORCE OVERRIDE ANY PRIMARY COLOR HOVER */
+.side-nav .side-nav-item:hover .side-nav-link[style*="background"],
+.side-nav .side-nav-item:hover .side-nav-link[style*="primary"],
+.leftside-menu .side-nav .side-nav-item:hover .side-nav-link {
+  background-color: #006AAB !important;
+  background: #006AAB !important;
+  color: white !important;
+}
+
+/* CONDENSED SIDEBAR HOVER */
+body[data-leftbar-compact-mode="condensed"] .side-nav .side-nav-item:hover .side-nav-link,
+body[data-leftbar-theme="light"][data-leftbar-compact-mode="condensed"] .side-nav .side-nav-item:hover .side-nav-link,
+body[data-leftbar-theme="dark"][data-leftbar-compact-mode="condensed"] .side-nav .side-nav-item:hover .side-nav-link {
+  background: #006AAB !important;
+  color: white !important;
+}
+
+/* LOGIN/AUTHENTICATION PAGES */
+.authentication-bg .card {
+  box-shadow: 0 0 35px 0 rgba(0, 106, 171, 0.25) !important;
+}
+
+.authentication-bg .btn-primary,
+.authentication-bg .btn-success {
+  background-color: #006AAB !important;
+  border-color: #006AAB !important;
+}
+
+.authentication-bg .btn-primary:hover,
+.authentication-bg .btn-success:hover {
+  background-color: #005a96 !important;
+  border-color: #005a96 !important;
+}
+
+.authentication-bg .form-control:focus {
+  border-color: #006AAB !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 106, 171, 0.25) !important;
+}
+
+.authentication-bg a {
+  color: #006AAB !important;
+}
+
+.authentication-bg a:hover {
+  color: #005a96 !important;
+}
+
+/* LOADING SPINNER */
+.spinner-border.text-primary,
+.spinner-border.text-success {
+  color: #006AAB !important;
+}
+
+/* TABLE HOVER */
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 106, 171, 0.05) !important;
+}
+
+/* TOAST NOTIFICATIONS */
+.toast-success {
+  background-color: #006AAB !important;
+}
+
+/* CUSTOM CLASSES */
+.text-green,
+.success-state,
+.status-success,
+.state-success {
+  color: #006AAB !important;
+}
+
+.bg-green {
+  background-color: #006AAB !important;
+}
+
+/* OVERRIDE INLINE STYLES */
+*[style*="#28a745"],
+*[style*="rgb(40, 167, 69)"],
+*[style*="#198754"],
+*[style*="rgb(25, 135, 84)"],
+*[style*="green"],
+*[style*="success"] {
+  color: #006AAB !important;
+  background-color: #006AAB !important;
+  border-color: #006AAB !important;
+}
+
+/* BREADCRUMB ACTIVE */
+.breadcrumb-item.active {
+  color: #006AAB !important;
+}
+
+/* CARD HEADERS */
+.card-header.bg-primary,
+.card-header.bg-success {
+  background-color: #006AAB !important;
+  border-color: #006AAB !important;
+}
+
+/* LIST GROUP */
+.list-group-item.active {
+  background-color: #006AAB !important;
+  border-color: #006AAB !important;
+}
+
+/* ACCORDION */
+.accordion-button:not(.collapsed) {
+  background-color: rgba(0, 106, 171, 0.1) !important;
+  color: #006AAB !important;
+}
+
+/* MODAL HEADERS */
+.modal-header.bg-primary,
+.modal-header.bg-success {
+  background-color: #006AAB !important;
+}
+
+/* OFFCANVAS */
+.offcanvas-header.bg-primary,
+.offcanvas-header.bg-success {
+  background-color: #006AAB !important;
+}
+
+/* TABS */
+.nav-tabs .nav-link.active {
+  color: #006AAB !important;
+  border-color: #006AAB #006AAB #fff !important;
+}
+
+/* SWITCH/TOGGLE COMPONENTS */
+.switch input:checked + .slider {
+  background-color: #006AAB !important;
+}
+
+/* RANGE SLIDER */
+.form-range::-webkit-slider-thumb {
+  background-color: #006AAB !important;
+}
+
+.form-range::-moz-range-thumb {
+  background-color: #006AAB !important;
+}
+
+/* SELECT2 DROPDOWN */
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: #006AAB !important;
+}
+
+/* DATEPICKER */
+.datepicker .active {
+  background-color: #006AAB !important;
+}
+
+/* CALENDAR */
+.fc-event {
+  background-color: #006AAB !important;
+  border-color: #006AAB !important;
+}
+
+/* CHART COLORS */
+.apexcharts-series path[fill="#28a745"],
+.apexcharts-series path[fill="#198754"] {
+  fill: #006AAB !important;
+}
+
+/* FORCE OVERRIDE ANY REMAINING GREEN */
+.green,
+.success,
+.primary {
+  color: #006AAB !important;
+}
+
+.bg-green,
+.bg-success,
+.bg-primary {
+  background-color: #006AAB !important;
+}
+
+/* EMERGENCY SIDEBAR HOVER OVERRIDE - NUCLEAR OPTION */
+.leftside-menu .side-nav .side-nav-item:hover .side-nav-link,
+.leftside-menu .side-nav .side-nav-item:hover > .side-nav-link,
+.leftside-menu .side-nav .side-nav-item .side-nav-link:hover,
+.leftside-menu .side-nav .side-nav-item .side-nav-link:focus,
+.leftside-menu .side-nav .side-nav-item .side-nav-link:active,
+.leftside-menu .side-nav .side-nav-item.menuitem-active .side-nav-link,
+.leftside-menu .side-nav .side-nav-item.menuitem-active > .side-nav-link,
+body .leftside-menu .side-nav .side-nav-item:hover .side-nav-link,
+body .leftside-menu .side-nav .side-nav-item .side-nav-link:hover,
+html body .leftside-menu .side-nav .side-nav-item:hover .side-nav-link,
+html body .leftside-menu .side-nav .side-nav-item .side-nav-link:hover,
+.wrapper .leftside-menu .side-nav .side-nav-item:hover .side-nav-link,
+.wrapper .leftside-menu .side-nav .side-nav-item .side-nav-link:hover {
+  background-color: #006AAB !important;
+  background: #006AAB !important;
+  color: white !important;
+}
+
+/* OVERRIDE ANY COMPUTED STYLES */
+.leftside-menu .side-nav .side-nav-item:hover .side-nav-link[style],
+.leftside-menu .side-nav .side-nav-item .side-nav-link:hover[style] {
+  background-color: #006AAB !important;
+  background: #006AAB !important;
+  color: white !important;
+}
+
+/* CATCH ALL POSSIBLE GREEN VARIATIONS */
+.leftside-menu .side-nav .side-nav-item:hover .side-nav-link[style*="#28a745"],
+.leftside-menu .side-nav .side-nav-item:hover .side-nav-link[style*="#198754"],
+.leftside-menu .side-nav .side-nav-item:hover .side-nav-link[style*="rgb(40, 167, 69)"],
+.leftside-menu .side-nav .side-nav-item:hover .side-nav-link[style*="rgb(25, 135, 84)"],
+.leftside-menu .side-nav .side-nav-item:hover .side-nav-link[style*="green"],
+.leftside-menu .side-nav .side-nav-item:hover .side-nav-link[style*="success"],
+.leftside-menu .side-nav .side-nav-item:hover .side-nav-link[style*="primary"] {
+  background-color: #006AAB !important;
+  background: #006AAB !important;
+  color: white !important;
+}
+
+/* IMPORTANT: Override any CSS that might come after this */
+* {
+  --green: #006AAB !important;
+  --success: #006AAB !important;
+  --primary: #006AAB !important;
+}

@@ -158,61 +158,33 @@ const MENU_ITEMS = [
         key: 'Dashboard',
         icon: 'uil-dashboard',
         label: 'Dashboard',
-        url: '/bmg/dashboard',
+        url: '/admin/dashboard',
     },
 
     {
-        key: 'Seller',
-        label: 'Seller',
-        icon: 'mdi mdi-account-cash',
+        key: 'Content Management',
+        label: 'Content Management',
+        icon: 'mdi mdi-file-document-multiple',
         children: [
-            { key: 'leads', label: 'Auction Leads', url: '/bmg/leads', parentKey: 'Seller' },
-            { key: 'live-bids', label: 'Live Bids', url: '/bmg/live-bids', parentKey: 'Seller' },
-            // { key: 'categories', label: 'Categories', url: '/bmg/categories', parentKey: 'Seller' },
-            { key: 'items', label: 'Items', url: '/bmg/items', parentKey: 'Seller' },
-            { key: 'sold-items', label: 'Sold Items', url: '/bmg/sold-items', parentKey: 'Seller' },
-            { key: 'orders', label: 'Orders', url: '/bmg/orders', parentKey: 'Seller' },
-            { key: 'transactions', label: 'Transactions', url: '/bmg/transactions', parentKey: 'Seller' },
-            { key: 'seller', label: 'Seller-List', url: '/bmg/sellers', parentKey: 'Seller' },
+            { key: 'faq', label: 'FAQ Management', url: '/admin/faq', parentKey: 'Content Management' },
+            { key: 'teams', label: 'Team Management', url: '/admin/teams', parentKey: 'Content Management' },
+            { key: 'services', label: 'Services Management', url: '/admin/services', parentKey: 'Content Management' },
+            { key: 'blogs', label: 'Blog Management', url: '/admin/blogs', parentKey: 'Content Management' },
+            { key: 'latest-news', label: 'Latest News', url: '/admin/latest-news', parentKey: 'Content Management' },
         ],
     },
 
     {
-        key: 'Buyer',
-        label: 'Buyer',
-        icon: 'mdi mdi-store-outline',
+        key: 'Immigration Services',
+        label: 'Immigration Services',
+        icon: 'mdi mdi-passport',
         children: [
-            // { key: 'analytics', label: 'Analytics', url: '/dashboard/analytics', parentKey: 'Buyer' },
-            // { key: 'faq', label: 'Faq', url: '/bmg/faq', parentKey: 'Buyer' },
-            // { key: 'notification', label: 'Notification', url: '/bmg/notification', parentKey: 'Buyer' },
-            // { key: 'enquiry', label: 'Enquiry', url: '/bmg/enquiry', parentKey: 'Buyer' },
-            { key: 'buyer', label: 'Buyer-List', url: '/bmg/buyers', parentKey: 'Buyer' },
+            { key: 'enquiry', label: 'Client Enquiries', url: '/admin/enquiry', parentKey: 'Immigration Services' },
+            { key: 'notification', label: 'Notifications', url: '/admin/notification', parentKey: 'Immigration Services' },
         ],
-    },
-    {
-        key: 'Handler',
-        label: 'Handler',
-        icon: 'mdi mdi-account-cash',
-        children: [{ key: 'bidPercentage', label: 'Bid Percentage', url: '/bmg/bidPercentage', parentKey: 'Handler' }],
     },
 
-    {
-        key: 'Settings',
-        label: 'Settings',
-        isTitle: false,
-        icon: 'mdi mdi-cog',
-        url: '/bmg/leads',
-        children: [
-            { key: 'platform-charges', label: 'Platform Charges', url: '/bmg/platform-charges', parentKey: 'Settings' },
-            // { key: 'analytics', label: 'Analytics', url: '/dashboard/analytics', parentKey: 'Buyer' },
-            { key: 'faq', label: 'Faq', url: '/bmg/faq', parentKey: 'Settings' },
-            { key: 'notification', label: 'Notification', url: '/bmg/notification', parentKey: 'Settings' },
-            { key: 'enquiry', label: 'Enquiry', url: '/bmg/enquiry', parentKey: 'Settings' },
-            { key: 'categories', label: 'Categories', url: '/bmg/categories', parentKey: 'Settings' },
-            { key: 'help-support', label: 'Help & Support', url: '/bmg/help-support', parentKey: 'Settings' },
-            { key: 'location', label: 'Location', url: '/bmg/location', parentKey: 'Settings' },
-        ],
-    },
+
 ];
 
 export default MENU_ITEMS;

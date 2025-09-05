@@ -2,7 +2,7 @@ import { Navigate } from 'react-router-dom';
 
 const Root = () => {
     const getRootUrl = () => {
-        let url = 'bmg/dashboard';
+        let url = 'admin/dashboard';
         return url;
     };
 

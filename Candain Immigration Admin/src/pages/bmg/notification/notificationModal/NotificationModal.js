@@ -66,8 +66,12 @@ const NotificationModal = ({ show, hide, notificationData, setApiCall }) => {
 
     // Handle form submission
     const handleSubmit = () => {
-        if (!notification.type || !notification.message.trim()) {
-            ToastContainer('Please fill in all fields as they are required !.', 'info');
+        if (!notification.type) {
+            ToastContainer('Please select a notification type.', 'info');
+            return;
+        }
+        if (!notification.message.trim() || notification.message.replace(/<[^>]*>/g, '').length < 5) {
+            ToastContainer('Message must be at least 5 characters long.', 'info');
             return;
         }
         const data = {
@@ -96,7 +100,7 @@ const NotificationModal = ({ show, hide, notificationData, setApiCall }) => {
         <Modal show={show} centered size="lg" backdrop="static"
         // onHide={closeModal}
         >
-            <Modal.Header className="px-2 py-1 text-light" style={{ backgroundColor: '#008003' }}>
+            <Modal.Header className="px-2 py-1 text-light" style={{ backgroundColor: '#006AAB' }}>
                 <Modal.Title>{notificationData?.type} Notification</Modal.Title>
                 {/* <i className="mdi mdi-close fs-3" onClick={closeModal} style={{ cursor: 'pointer' }}></i> */}
             </Modal.Header>
@@ -129,7 +133,7 @@ const NotificationModal = ({ show, hide, notificationData, setApiCall }) => {
                             onChange={handleQuillChange}
                             theme="snow"
                             modules={modules}
-                            placeholder="Enter message..."
+                            placeholder="Enter message (minimum 5 characters)..."
                         />
                     </Form.Group>
                     {notificationData?.data && (
@@ -147,7 +151,7 @@ const NotificationModal = ({ show, hide, notificationData, setApiCall }) => {
                 <Button variant="danger" onClick={closeModal}>
                     Cancel
                 </Button>
-                <Button style={{ backgroundColor: '#008003' }} onClick={handleSubmit} disabled={loading}>
+                <Button style={{ backgroundColor: '#006AAB' }} onClick={handleSubmit} disabled={loading}>
                     {loading ? (
                         <ButtonLoading />
                     ) : (

@@ -1,0 +1,32 @@
+/* EMERGENCY COLOR OVERRIDE - LOADED IN HTML HEAD */
+:root {
+  --bs-primary: #006AAB !important;
+  --bs-success: #006AAB !important;
+  --primary: #006AAB !important;
+  --success: #006AAB !important;
+  --green: #006AAB !important;
+}
+
+.btn-primary, .btn-success, .bg-primary, .bg-success, .text-primary, .text-success {
+  background-color: #006AAB !important;
+  border-color: #006AAB !important;
+  color: white !important;
+}
+
+.side-nav .menuitem-active > .side-nav-link,
+.side-nav .side-nav-link:hover,
+.side-nav-item:hover > .side-nav-link {
+  background-color: #006AAB !important;
+  color: white !important;
+}
+
+.authentication-bg .btn-primary {
+  background-color: #006AAB !important;
+  border-color: #006AAB !important;
+}
+
+*[style*="green"], *[style*="#28a745"], *[style*="#198754"] {
+  color: #006AAB !important;
+  background-color: #006AAB !important;
+  border-color: #006AAB !important;
+}

@@ -42,23 +42,24 @@ async function createLatestNews(req, res) {
 // Get all latest news posts
 const getAllLatestNews = async (req, res) => {
   try {
-    const latestNews = await latestNews.find().sort({ createdAt: -1 });
-    res.status(200).json({ status: 200, message: "Latest news fetched successfully", response: latestNews });
+    const latestNewss = await latestNews.find().sort({ createdAt: -1 });
+    res.status(200).json({ status: 200, message: "Latest news fetched successfully", response: latestNewss });
   } catch (error) {
-    res.status(500).json({ status: 500, message: 'Error fetching latest news', error });
+    console.log(error);
+    res.status(500).json({ status: 500, message: 'Error fetching latest news' });
   }
 };
 
 // Get a single latest news post by ID
 const getLatestNewsById = async (req, res) => {
   try {
-    const singleLatestNews = await latestNews.findById(req.params.id); 
+    const singleLatestNews = await latestNews.findById(req.params.id);
     if (!singleLatestNews) {
-      return res.status(404).json({status:404, message: "Latest news not found" });
+      return res.status(404).json({ status: 404, message: "Latest news not found" });
     }
-    res.status(200).json({status:200,message:"Latest news fetched successfully",response:singleLatestNews});
+    res.status(200).json({ status: 200, message: "Latest news fetched successfully", response: singleLatestNews });
   } catch (error) {
-    res.status(500).json({ status:500,message: "Error fetching latest news", error: error.message });
+    res.status(500).json({ status: 500, message: "Error fetching latest news", error: error.message });
   }
 };
 
@@ -73,21 +74,21 @@ const updateLatestNews = async (req, res) => {
         paragraph,
         ...(req.file && { image: `http://localhost:3500/uploads/${req.file.filename}` }),
       },
-      { new: true, runValidators: true }
+      { new: true }
     );
 
     if (!updatedLatestNews) {
-      return res.status(404).json({ status:404, message: "Latest news not found" });
+      return res.status(404).json({ status: 404, message: "Latest news not found" });
     }
 
     res.status(200).json({
-      status:200,
+      status: 200,
       message: "Latest news updated successfully",
       response: updatedLatestNews,
     });
   } catch (error) {
     res.status(500).json({
-      status:500,
+      status: 500,
       message: "Error updating latest news",
       error: error.message,
     });
@@ -100,11 +101,11 @@ const deleteLatestNews = async (req, res) => {
     const { _id } = req.body;
     const deletedLatestNews = await latestNews.findByIdAndDelete(_id);
     if (!deletedLatestNews) {
-      return res.status(404).json({status:404, message: 'Latest news not found' });
+      return res.status(404).json({ status: 404, message: 'Latest news not found' });
     }
-    res.status(200).json({status:200, message: 'Latest news deleted successfully' });
+    res.status(200).json({ status: 200, message: 'Latest news deleted successfully' });
   } catch (error) {
-    res.status(500).json({ status:500,message: 'Error deleting latest news', error });
+    res.status(500).json({ status: 500, message: 'Error deleting latest news', error });
   }
 };
 
