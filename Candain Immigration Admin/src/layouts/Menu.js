@@ -22,7 +22,7 @@ const MenuItemWithChildren = ({ item, linkClassName, subMenuClassNames, activeMe
     };
 
     return (
-        <li className={classNames('side-nav-item', { 'menuitem-active': open })}>
+        <li className={classNames('side-nav-item hover-lift', { 'menuitem-active': open })}>
             <Link
                 to="/#"
                 onClick={toggleMenuItem}
@@ -81,7 +81,7 @@ const MenuItemWithChildren = ({ item, linkClassName, subMenuClassNames, activeMe
 
 const MenuItem = ({ item, className, linkClassName }) => {
     return (
-        <li className={classNames('side-nav-item', className)}>
+        <li className={classNames('side-nav-item hover-scale', className)}>
             <MenuItemLink item={item} className={linkClassName} />
         </li>
     );
@@ -161,7 +161,7 @@ const AppMenu = ({ menuItems }: AppMenuProps): React$Element<React$FragmentType>
 
     return (
         <>
-            <ul className="side-nav" ref={menuRef} id="main-side-menu">
+            <ul className="side-nav animate-slide-left" ref={menuRef} id="main-side-menu">
                 {(menuItems || []).map((item, idx) => {
                     return (
                         <React.Fragment key={idx}>

@@ -142,14 +142,16 @@ const BlogsModal = ({ show, hide, blogsData }) => {
                     <p className="mt-3"><strong>Status:</strong> {blogsData.data?.status ? 'Published' : 'Draft'}</p>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={hide}>Close</Button>
+                    <Button variant="secondary" className="btn-cancel" onClick={hide}>
+                        <i className="mdi mdi-close"></i>Close
+                    </Button>
                 </Modal.Footer>
             </Modal>
         );
     }
 
     return (
-        <Modal show={show} onHide={hide} size={blogsData.type === 'Delete' ? 'sm' : 'lg'} centered backdrop="static">
+        <Modal show={show} onHide={hide} size={blogsData.type === 'Delete' ? 'sm' : 'lg'} centered className="modal-animate">
             {blogsData.type === 'Delete' ? (
                 <>
                     <Modal.Header closeButton className="border-0">
@@ -168,7 +170,7 @@ const BlogsModal = ({ show, hide, blogsData }) => {
                         </div>
                     </Modal.Body>
                     <Modal.Footer className="border-0 justify-content-center">
-                        <Button variant="outline-secondary" onClick={hide} className="px-4 me-2">
+                        <Button variant="outline-secondary" onClick={hide} className="px-4 me-2 btn-cancel">
                             <i className="mdi mdi-close me-1"></i>Cancel
                         </Button>
                         <Button variant="danger" onClick={handleDelete} className="px-4">
@@ -185,7 +187,7 @@ const BlogsModal = ({ show, hide, blogsData }) => {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="p-4" style={{ backgroundColor: '#f8f9fa' }}>
-                        <div className="bg-white p-4 rounded shadow-sm">
+                        <div className="bg-white p-4 rounded shadow-sm animate-slide-left">
                             <Form>
                                 <Form.Group className="mb-4">
                                     <Form.Label className="fw-semibold mb-2">
@@ -339,11 +341,11 @@ const BlogsModal = ({ show, hide, blogsData }) => {
                         </div>
                     </Modal.Body>
                     <Modal.Footer className="px-4 py-3 border-0" style={{ backgroundColor: '#f8f9fa' }}>
-                        <Button variant="outline-secondary" onClick={hide} className="px-4 me-2">
+                        <Button variant="outline-secondary" onClick={hide} className="px-4 me-2 btn-cancel">
                             <i className="mdi mdi-close me-1"></i>Cancel
                         </Button>
                         <Button
-                            className="px-4"
+                            className="px-4 btn-animated hover-glow"
                             style={{ backgroundColor: '#006AAB', borderColor: '#006AAB' }}
                             onClick={handleSubmit}
                             disabled={blogsDataReducer?.loading}

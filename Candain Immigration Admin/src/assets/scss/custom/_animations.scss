@@ -1,0 +1,442 @@
+// Animation Keyframes
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+// Animation Classes
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-slide-left {
+  animation: slideInLeft 0.5s ease-out forwards;
+}
+
+.animate-slide-right {
+  animation: slideInRight 0.5s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.4s ease-out forwards;
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+
+.animate-bounce {
+  animation: bounce 1s;
+}
+
+// Hover Animations
+.hover-lift {
+  transition: all 0.3s ease;
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.hover-scale {
+  transition: transform 0.2s ease;
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.hover-glow {
+  transition: all 0.3s ease;
+  &:hover {
+    box-shadow: 0 0 20px rgba(0, 106, 171, 0.3);
+  }
+}
+
+// Loading Shimmer
+.shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+// Stagger Animation
+.stagger-item {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.stagger-item:nth-child(1) { animation-delay: 0.1s; }
+.stagger-item:nth-child(2) { animation-delay: 0.2s; }
+.stagger-item:nth-child(3) { animation-delay: 0.3s; }
+.stagger-item:nth-child(4) { animation-delay: 0.4s; }
+.stagger-item:nth-child(5) { animation-delay: 0.5s; }
+
+// Button Animations
+.btn-animated {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+  
+  &:hover::before {
+    left: 100%;
+  }
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// Modal Animations
+.modal-animate {
+  .modal-dialog {
+    animation: scaleIn 0.3s ease-out;
+  }
+}
+
+// Modern Table Styles
+.modern-table {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: none;
+  
+  thead {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    
+    th {
+      border: none;
+      font-weight: 600;
+      color: #495057;
+      padding: 20px 16px;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  }
+  
+  tbody {
+    tr {
+      border: none;
+      transition: all 0.3s ease;
+      position: relative;
+      
+      &:nth-child(even) {
+        background-color: rgba(248, 249, 250, 0.3);
+      }
+      
+      &:hover {
+        background: linear-gradient(90deg, rgba(0, 106, 171, 0.05) 0%, rgba(0, 106, 171, 0.02) 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 106, 171, 0.1);
+        z-index: 10;
+      }
+      
+      td {
+        border: none;
+        padding: 20px 16px;
+        vertical-align: middle;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+    }
+  }
+}
+
+// Modern Badge Styles
+.modern-badge {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  &.status-active {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+  }
+  
+  &.status-inactive {
+    background: linear-gradient(135deg, #ffc107, #fd7e14);
+    color: white;
+  }
+}
+
+// Modern Action Buttons
+.action-btn-group {
+  display: flex;
+  gap: 8px;
+  
+  .action-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      transform: scale(0);
+      transition: transform 0.3s ease;
+    }
+    
+    &:hover::before {
+      transform: scale(1);
+    }
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    &.edit-btn {
+      background: linear-gradient(135deg, #007bff, #0056b3);
+      color: white;
+    }
+    
+    &.delete-btn {
+      background: linear-gradient(135deg, #dc3545, #c82333);
+      color: white;
+    }
+    
+    &.view-btn {
+      background: linear-gradient(135deg, #17a2b8, #138496);
+      color: white;
+    }
+  }
+}
+
+// Modal Cancel Button
+.btn-cancel {
+  background: linear-gradient(135deg, #dc3545, #c82333) !important;
+  border-color: #dc3545 !important;
+  color: white !important;
+  padding: 8px 16px !important;
+  min-width: 100px;
+  
+  &:hover {
+    background: linear-gradient(135deg, #c82333, #a71e2a) !important;
+    border-color: #c82333 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+  }
+  
+  i {
+    margin-right: 6px;
+  }
+}
+
+// Modern Avatar
+.modern-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 3px solid rgba(0, 106, 171, 0.1);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    border-color: #006AAB;
+    transform: scale(1.1);
+  }
+}
+
+// Table Loading Animation
+.table-loading {
+  .skeleton-row {
+    td {
+      padding: 20px 16px;
+      
+      .skeleton {
+        height: 20px;
+        border-radius: 10px;
+        animation: shimmer 1.5s infinite;
+      }
+    }
+  }
+}
+
+// Card Animations
+.card-animate {
+  transition: all 0.3s ease;
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Icon Spin
+.icon-spin {
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: rotate(360deg);
+  }
+}
+
+// Gradient Animation
+.gradient-animate {
+  background: linear-gradient(-45deg, #006AAB, #004d7a, #0056b3, #003d5c);
+  background-size: 400% 400%;
+  animation: gradientShift 4s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+// Page Loading Animation
+.page-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeOut 0.5s ease-out 2s forwards;
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
+
+// Enhanced Button Hover
+.btn-enhanced {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+  
+  &:hover::after {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+// Notification Badge Animation
+.notification-badge {
+  animation: pulse 2s infinite;
+  transform-origin: center;
+}
+
+// Smooth Scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #006AAB, #004d7a);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #004d7a, #006AAB);
+}
+
+// Loading Skeleton
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+// Floating Action Button
+.fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #006AAB, #004d7a);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 106, 171, 0.4);
+  transition: all 0.3s ease;
+  animation: bounce 2s infinite;
+  
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 106, 171, 0.6);
+  }
+}

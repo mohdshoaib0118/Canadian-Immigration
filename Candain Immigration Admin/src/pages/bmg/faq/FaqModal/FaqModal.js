@@ -92,7 +92,7 @@ const FaqModal = ({ show, hide, faqData }) => {
 
     if (faqData?.type === 'Delete') {
         return (
-            <Modal show={show} centered size="sm" backdrop='static'>
+            <Modal show={show} onHide={closeModal} centered size="sm" className="modal-animate">
                 <Modal.Header closeButton className="border-0">
                     <Modal.Title className="fw-bold">Delete FAQ</Modal.Title>
                 </Modal.Header>
@@ -109,7 +109,7 @@ const FaqModal = ({ show, hide, faqData }) => {
                     </div>
                 </Modal.Body>
                 <Modal.Footer className="border-0 justify-content-center">
-                    <Button variant="outline-secondary" onClick={closeModal} className="px-4 me-2">
+                    <Button variant="outline-secondary" onClick={closeModal} className="px-4 me-2 btn-cancel">
                         <i className="mdi mdi-close me-1"></i>Cancel
                     </Button>
                     <Button variant="danger" onClick={handleDelete} className="px-4" disabled={loading}>
@@ -130,7 +130,7 @@ const FaqModal = ({ show, hide, faqData }) => {
     }
 
     return (
-        <Modal show={show} centered size="lg" backdrop='static'>
+        <Modal show={show} onHide={closeModal} centered size="lg" className="modal-animate">
             <Modal.Header className="px-3 py-3 text-light border-0" style={{ backgroundColor: '#006AAB', borderRadius: '0.375rem 0.375rem 0 0' }}>
                 <Modal.Title className="fw-bold d-flex align-items-center">
                     <i className={`mdi ${faqData?.type === 'Add' ? 'mdi-plus-circle' : 'mdi-pencil'} me-2`}></i>
@@ -138,7 +138,7 @@ const FaqModal = ({ show, hide, faqData }) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body className="p-4" style={{ backgroundColor: '#f8f9fa' }}>
-                <div className="bg-white p-4 rounded shadow-sm">
+                <div className="bg-white p-4 rounded shadow-sm animate-slide-left">
                     <Form>
                         <Form.Group className="mb-4">
                             <Form.Label className="fw-semibold mb-2">
@@ -200,11 +200,11 @@ const FaqModal = ({ show, hide, faqData }) => {
                 </div>
             </Modal.Body>
             <Modal.Footer className="px-4 py-3 border-0" style={{ backgroundColor: '#f8f9fa' }}>
-                <Button variant="outline-secondary" onClick={closeModal} className="px-4 me-2">
+                <Button variant="outline-secondary" onClick={closeModal} className="px-4 me-2 btn-cancel">
                     <i className="mdi mdi-close me-1"></i>Cancel
                 </Button>
                 <Button 
-                    className="px-4"
+                    className="px-4 btn-animated hover-glow"
                     style={{ backgroundColor: '#006AAB', borderColor: '#006AAB' }}
                     onClick={handleSubmit} 
                     disabled={loading}

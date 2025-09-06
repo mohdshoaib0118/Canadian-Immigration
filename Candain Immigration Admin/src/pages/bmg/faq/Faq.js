@@ -6,6 +6,7 @@ import { Loading } from '../../../helpers/loader/Loading';
 import { getFaqActions } from '../../../redux/actions';
 import Pagination from '../../../helpers/Pagination';
 import FaqModal from './FaqModal/FaqModal';
+import FloatingActionButton from '../../../components/FloatingActionButton';
 
 const Faq = () => {
     const dispatch = useDispatch();
@@ -51,8 +52,8 @@ const Faq = () => {
 
             <Row>
                 <Col xs={12}>
-                    <Card className="border-0 shadow-lg" style={{ borderRadius: '15px' }}>
-                        <Card.Header className="bg-gradient border-0 py-4" style={{ background: 'linear-gradient(135deg, #006AAB 0%, #004d7a 100%)', borderRadius: '15px 15px 0 0' }}>
+                    <Card className="border-0 shadow-lg animate-fade-in hover-lift" style={{ borderRadius: '15px' }}>
+                        <Card.Header className="bg-gradient border-0 gradient-animate" style={{ borderRadius: '15px 15px 0 0' }}>
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="d-flex align-items-center">
                                     <div className="bg-white bg-opacity-20 rounded-circle p-3 me-3">
@@ -71,7 +72,7 @@ const Faq = () => {
                                 </div>
                             </div>
                         </Card.Header>
-                        <Card.Body className="p-4">
+                        <Card.Body className="py-0">
                             <div className="d-flex justify-content-between align-items-center mb-4">
                                 <div className="d-flex align-items-center gap-3">
                                     <div className="position-relative">
@@ -98,7 +99,7 @@ const Faq = () => {
                                     )}
                                 </div>
                                 <Button
-                                    className="px-4 py-2 fw-semibold"
+                                    className="px-4 py-2 fw-semibold btn-animated hover-glow"
                                     style={{
                                         backgroundColor: '#006AAB',
                                         borderColor: '#006AAB',
@@ -115,8 +116,8 @@ const Faq = () => {
                                 <Loading />
                             ) : FaqData.length > 0 ? (
                                 <div className="table-responsive">
-                                    <Table className="mb-0 table-hover" style={{ borderRadius: '10px', overflow: 'hidden' }}>
-                                        <thead style={{ backgroundColor: '#f8f9fa' }}>
+                                    <Table className="mb-0 modern-table">
+                                        <thead>
                                             <tr>
                                                 <th className="border-0 py-3 text-muted fw-semibold">#</th>
                                                 <th className="border-0 py-3 text-muted fw-semibold">Question</th>
@@ -127,7 +128,7 @@ const Faq = () => {
                                         </thead>
                                         <tbody>
                                             {FaqData.map((data, index) => (
-                                                <tr key={data._id || index} className="border-bottom">
+                                                <tr key={data._id || index} className="stagger-item">
                                                     <td className="py-3 align-middle">
                                                         <span className="badge bg-light text-dark rounded-pill">{(pageIndex - 1) * pageSize + index + 1}</span>
                                                     </td>
@@ -146,34 +147,27 @@ const Faq = () => {
                                                         </div>
                                                     </td>
                                                     <td className="py-3 align-middle">
-                                                        <span
-                                                            className={`badge px-3 py-2 ${data?.status ? 'bg-success' : 'bg-warning'}`}
-                                                            style={{ borderRadius: '20px' }}
-                                                        >
+                                                        <span className={`modern-badge ${data?.status ? 'status-active' : 'status-inactive'}`}>
                                                             <i className={`mdi ${data?.status ? 'mdi-check-circle' : 'mdi-pause-circle'} me-1`}></i>
                                                             {data?.status ? 'Active' : 'Inactive'}
                                                         </span>
                                                     </td>
                                                     <td className="py-3 align-middle text-center">
-                                                        <div className="btn-group" role="group">
-                                                            <Button
-                                                                size="sm"
-                                                                variant="outline-primary"
-                                                                className="rounded-start"
+                                                        <div className="action-btn-group">
+                                                            <button
+                                                                className="action-btn edit-btn"
                                                                 onClick={() => handleFaqModal('Edit', data)}
                                                                 title="Edit FAQ"
                                                             >
                                                                 <i className="mdi mdi-pencil"></i>
-                                                            </Button>
-                                                            <Button
-                                                                size="sm"
-                                                                variant="outline-danger"
-                                                                className="rounded-end"
+                                                            </button>
+                                                            <button
+                                                                className="action-btn delete-btn"
                                                                 onClick={() => handleFaqModal('Delete', data)}
                                                                 title="Delete FAQ"
                                                             >
                                                                 <i className="mdi mdi-delete"></i>
-                                                            </Button>
+                                                            </button>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -214,6 +208,12 @@ const Faq = () => {
                 show={faqModal.isVisible}
                 hide={handleModalClose}
                 faqData={faqModal}
+            />
+
+            <FloatingActionButton
+                onClick={() => handleFaqModal('Add')}
+                icon="mdi-help-circle-outline"
+                tooltip="Add New FAQ"
             />
         </>
     );

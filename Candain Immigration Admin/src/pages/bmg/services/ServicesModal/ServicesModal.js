@@ -88,7 +88,7 @@ const ServicesModal = ({ show, hide, servicesData }) => {
     };
 
     return (
-        <Modal show={show} onHide={hide} size={servicesData.type === 'Delete' ? 'sm' : 'lg'} centered backdrop="static">
+        <Modal show={show} onHide={hide} size={servicesData.type === 'Delete' ? 'sm' : 'lg'} centered className="modal-animate">
             {servicesData.type === 'Delete' ? (
                 <>
                     <Modal.Header closeButton>
@@ -101,7 +101,7 @@ const ServicesModal = ({ show, hide, servicesData }) => {
                         <small className="text-muted">This cannot be undone.</small>
                     </Modal.Body>
                     <Modal.Footer className="py-2">
-                        <Button variant="secondary" size="sm" onClick={hide}>Cancel</Button>
+                        <Button variant="secondary" size="sm" className="btn-cancel" onClick={hide}>Cancel</Button>
                         <Button variant="danger" size="sm" onClick={handleDelete}>Delete</Button>
                     </Modal.Footer>
                 </>
@@ -208,8 +208,11 @@ const ServicesModal = ({ show, hide, servicesData }) => {
                         </Form>
                     </Modal.Body>
                     <Modal.Footer className="px-2 py-1">
-                        <Button variant="danger" onClick={hide}>Cancel</Button>
-                        <Button style={{ backgroundColor: '#006AAB' }} onClick={handleSubmit}>
+                        <Button variant="danger" className="btn-cancel" onClick={hide}>
+                            <i className="mdi mdi-close"></i>Cancel
+                        </Button>
+                        <Button className="btn-animated hover-glow" style={{ backgroundColor: '#006AAB' }} onClick={handleSubmit}>
+                            <i className={`mdi ${servicesData.type === 'Add' ? 'mdi-plus' : 'mdi-content-save'} me-1`}></i>
                             {servicesData.type === 'Add' ? 'Add Service' : 'Update Service'}
                         </Button>
                     </Modal.Footer>

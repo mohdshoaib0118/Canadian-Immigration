@@ -5,6 +5,7 @@ import PageTitle from '../../../helpers/PageTitle';
 import { Loading } from '../../../helpers/loader/Loading';
 import Pagination from '../../../helpers/Pagination';
 import TeamsModal from './TeamsModal/TeamsModal';
+import FloatingActionButton from '../../../components/FloatingActionButton';
 import { getTeamsActions } from '../../../redux/actions';
 
 const Teams = () => {
@@ -45,8 +46,8 @@ const Teams = () => {
 
             <Row>
                 <Col xs={12}>
-                    <Card className="border-0 shadow-lg" style={{ borderRadius: '15px' }}>
-                        <Card.Header className="bg-gradient border-0 py-4" style={{ background: 'linear-gradient(135deg, #006AAB 0%, #004d7a 100%)', borderRadius: '15px 15px 0 0' }}>
+                    <Card className="border-0 shadow-lg animate-fade-in hover-lift" style={{ borderRadius: '15px' }}>
+                        <Card.Header className="bg-gradient border-0 gradient-animate" style={{ borderRadius: '15px 15px 0 0' }}>
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="d-flex align-items-center">
                                     <div className="bg-white bg-opacity-20 rounded-circle p-3 me-3">
@@ -65,7 +66,7 @@ const Teams = () => {
                                 </div>
                             </div>
                         </Card.Header>
-                        <Card.Body className="p-4">
+                        <Card.Body className="py-0">
                             <div className="d-flex justify-content-between align-items-center mb-4">
                                 <div className="d-flex align-items-center gap-3">
                                     <div className="position-relative">
@@ -92,7 +93,7 @@ const Teams = () => {
                                     )}
                                 </div>
                                 <Button
-                                    className="px-4 py-2 fw-semibold"
+                                    className="px-4 py-2 fw-semibold btn-animated hover-glow"
                                     style={{
                                         backgroundColor: '#006AAB',
                                         borderColor: '#006AAB',
@@ -109,8 +110,8 @@ const Teams = () => {
                                 <Loading />
                             ) : TeamsData.length > 0 ? (
                                 <div className="table-responsive">
-                                    <Table className="mb-0 table-hover" style={{ borderRadius: '10px', overflow: 'hidden' }}>
-                                        <thead style={{ backgroundColor: '#f8f9fa' }}>
+                                    <Table className="mb-0 modern-table">
+                                        <thead>
                                             <tr>
                                                 <th className="border-0 py-3 text-muted fw-semibold">#</th>
                                                 <th className="border-0 py-3 text-muted fw-semibold">Photo</th>
@@ -123,16 +124,15 @@ const Teams = () => {
                                         </thead>
                                         <tbody>
                                             {TeamsData.map((data, index) => (
-                                                <tr key={data._id || index} className="border-bottom">
+                                                <tr key={data._id || index} className="stagger-item">
                                                     <td className="py-3 align-middle">
                                                         <span className="badge bg-light text-dark rounded-pill">{(pageIndex - 1) * pageSize + index + 1}</span>
                                                     </td>
-                                                    <td className="py-3 align-middle">
+                                                    <td className="align-middle">
                                                         <img
                                                             src={data?.image || '/default-avatar.png'}
                                                             alt={data?.name}
-                                                            className="rounded-circle shadow-sm"
-                                                            style={{ width: '50px', height: '50px', objectFit: 'cover' }}
+                                                            className="modern-avatar"
                                                         />
                                                     </td>
                                                     <td className="py-3 align-middle">
@@ -150,35 +150,28 @@ const Teams = () => {
                                                             {new Date(data?.createdAt).toLocaleDateString() || 'N/A'}
                                                         </div>
                                                     </td>
-                                                    <td className="py-3 align-middle">
-                                                        <span
-                                                            className={`badge px-3 py-2 ${data?.status ? 'bg-success' : 'bg-warning'}`}
-                                                            style={{ borderRadius: '20px' }}
-                                                        >
+                                                    <td className="align-middle">
+                                                        <span className={`modern-badge ${data?.status ? 'status-active' : 'status-inactive'}`}>
                                                             <i className={`mdi ${data?.status ? 'mdi-check-circle' : 'mdi-pause-circle'} me-1`}></i>
                                                             {data?.status ? 'Active' : 'Inactive'}
                                                         </span>
                                                     </td>
-                                                    <td className="py-3 align-middle text-center">
-                                                        <div className="btn-group" role="group">
-                                                            <Button
-                                                                size="sm"
-                                                                variant="outline-primary"
-                                                                className="rounded-start"
+                                                    <td className="align-middle text-center">
+                                                        <div className="action-btn-group">
+                                                            <button
+                                                                className="action-btn edit-btn"
                                                                 onClick={() => handleTeamsModal('Edit', data)}
                                                                 title="Edit Team Member"
                                                             >
                                                                 <i className="mdi mdi-pencil"></i>
-                                                            </Button>
-                                                            <Button
-                                                                size="sm"
-                                                                variant="outline-danger"
-                                                                className="rounded-end"
+                                                            </button>
+                                                            <button
+                                                                className="action-btn delete-btn"
                                                                 onClick={() => handleTeamsModal('Delete', data)}
                                                                 title="Delete Team Member"
                                                             >
                                                                 <i className="mdi mdi-delete"></i>
-                                                            </Button>
+                                                            </button>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -219,6 +212,12 @@ const Teams = () => {
                 show={teamsModal.isVisible}
                 hide={() => setTeamsModal({ ...teamsModal, isVisible: false })}
                 teamsData={teamsModal}
+            />
+
+            <FloatingActionButton
+                onClick={() => handleTeamsModal('Add')}
+                icon="mdi-account-plus"
+                tooltip="Add Team Member"
             />
         </>
     );

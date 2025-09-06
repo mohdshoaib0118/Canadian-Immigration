@@ -37,8 +37,8 @@ const Enquiry = () => {
             />
             <Row>
                 <Col xs={12}>
-                    <Card className="border-0 shadow-lg" style={{ borderRadius: '15px' }}>
-                        <Card.Header className="bg-gradient border-0 py-4" style={{ background: 'linear-gradient(135deg, #006AAB 0%, #004d7a 100%)', borderRadius: '15px 15px 0 0' }}>
+                    <Card className="border-0 shadow-lg animate-fade-in hover-lift" style={{ borderRadius: '15px' }}>
+                        <Card.Header className="bg-gradient border-0 gradient-animate" style={{ borderRadius: '15px 15px 0 0' }}>
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="d-flex align-items-center">
                                     <div className="bg-white bg-opacity-20 rounded-circle p-3 me-3">
@@ -57,7 +57,7 @@ const Enquiry = () => {
                                 </div>
                             </div>
                         </Card.Header>
-                        <Card.Body className="p-4">
+                        <Card.Body className="py-0">
                             <div className="d-flex justify-content-start align-items-center mb-4">
                                 <div className="position-relative">
                                     <input
@@ -92,8 +92,8 @@ const Enquiry = () => {
                                     {EnquiryData && EnquiryData?.length > 0 ? (
                                         <>
                                             <div className="table-responsive">
-                                                <table className="table mb-0 table-hover" style={{ borderRadius: '10px', overflow: 'hidden' }}>
-                                                    <thead style={{ backgroundColor: '#f8f9fa' }}>
+                                                <table className="table mb-0 modern-table">
+                                                    <thead>
                                                         <tr>
                                                             <th className="border-0 py-3 text-muted fw-semibold">#</th>
                                                             <th className="border-0 py-3 text-muted fw-semibold">Full Name</th>
@@ -104,7 +104,7 @@ const Enquiry = () => {
                                                     </thead>
                                                     <tbody>
                                                         {EnquiryData?.map((data, index) => (
-                                                            <tr key={index} className="border-bottom">
+                                                            <tr key={index} className="stagger-item">
                                                                 <td className="py-3 align-middle">
                                                                     <span className="badge bg-light text-dark rounded-pill">{(pageIndex - 1) * pageSize + index + 1}</span>
                                                                 </td>

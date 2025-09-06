@@ -155,7 +155,7 @@ const Dashboard = () => {
                     <Row className="g-4 mb-4">
                         {dashboardItems?.map((item, index) => (
                             <Col key={index} md={6} lg={4}>
-                                <Card className={`shadow border-0 bg-${item.color} text-dark`}>
+                                <Card className={`shadow border-0 bg-${item.color} text-dark dashboard-card hover-lift stagger-item`}>
                                     <Card.Body className="d-flex align-items-center justify-content-between">
                                         <div>
                                             <h6 className="fw-semibold">{item.title}</h6>
@@ -168,7 +168,7 @@ const Dashboard = () => {
                         ))}
                     </Row>
 
-                    <div className="table-container">
+                    <div className="table-container animate-fade-in">
                         <Table hover className="text-center align-middle mb-0">
                             <thead className="table-header">
                                 <tr className="text-nowrap">

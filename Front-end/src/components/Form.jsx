@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { contactAPI } from '../services/api'
 
 const Form = () => {
 
@@ -7,9 +8,11 @@ const Form = () => {
         lastname: '',
         emailid: '',
         phone: '',
-        role: '',
+        role: 'Employer',
         message: ''
     });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitMessage, setSubmitMessage] = useState('');
     const [errors, setErrors] = useState(
         {
             firstnameerror: '',
@@ -64,27 +67,57 @@ const Form = () => {
     }
 
 
-    const submithandler = (e) => {
+    const submithandler = async (e) => {
         e.preventDefault();
         const validationErrors = errorhandler();
         if (Object.keys(validationErrors).length === 0) {
-            // console.log("Form submitted:", formdata);
-            setFormData({
-                firstname: '',
-                lastname: '',
-                emailid: '',
-                phoneno: '',
-                role: '',
-                message: ''
-            })
-            setErrors({ 
-                firstnameerror: '',
-                lastnameerror: '',
-                emailiderror: '',
-                phonenoerror: '',
-                roleerror: '',
-                messageerror: ''
-            });
+            setIsSubmitting(true);
+            setSubmitMessage('');
+            
+            try {
+                const response = await contactAPI.sendMail({
+                    firstName: formdata.firstname,
+                    lastName: formdata.lastname,
+                    email: formdata.emailid,
+                    phoneNumber: parseInt(formdata.phone),
+                    role: formdata.role,
+                    message: formdata.message
+                });
+                
+                setSubmitMessage('Message sent successfully!');
+                setFormData({
+                    firstname: '',
+                    lastname: '',
+                    emailid: '',
+                    phone: '',
+                    role: 'Employer',
+                    message: ''
+                });
+                setErrors({ 
+                    firstnameerror: '',
+                    lastnameerror: '',
+                    emailiderror: '',
+                    phonenoerror: '',
+                    roleerror: '',
+                    messageerror: ''
+                });
+                
+                // Clear success message after 5 seconds
+                setTimeout(() => {
+                    setSubmitMessage('');
+                }, 5000);
+            } catch (error) {
+                console.error('Error sending message:', error);
+                const errorMessage = error.response?.data?.message || 'Failed to send message. Please try again.';
+                setSubmitMessage(errorMessage);
+                
+                // Clear error message after 5 seconds
+                setTimeout(() => {
+                    setSubmitMessage('');
+                }, 5000);
+            } finally {
+                setIsSubmitting(false);
+            }
         }
     }
     return (
@@ -172,8 +205,21 @@ const Form = () => {
                 {errors.messageerror ? <h4 className='text-sm flex flex-nowrap items-center text-red-600'><span className='text-red-600'>*</span>{errors.messageerror}</h4> : ''}
             </div>
 
-            <button onClick={submithandler} className='sm:text-2xl text-lg bg-[#006AAB] px-4 py-2 mt-6 sm:mt-9 text-white rounded hover:cursor-pointer' id='buttonStyle'>
-                Send Message
+            {submitMessage && (
+                <div className={`mt-4 p-3 rounded ${submitMessage.includes('successfully') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                    {submitMessage}
+                </div>
+            )}
+            
+            <button 
+                onClick={submithandler} 
+                disabled={isSubmitting}
+                className={`sm:text-2xl text-lg px-4 py-2 mt-6 sm:mt-9 text-white rounded hover:cursor-pointer ${
+                    isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#006AAB]'
+                }`} 
+                id='buttonStyle'
+            >
+                {isSubmitting ? 'Sending...' : 'Send Message'}
             </button>
         </form>
     )

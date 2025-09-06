@@ -5,6 +5,7 @@ import PageTitle from '../../../helpers/PageTitle';
 import { Loading } from '../../../helpers/loader/Loading';
 import Pagination from '../../../helpers/Pagination';
 import BlogsModal from './BlogsModal/BlogsModal';
+import FloatingActionButton from '../../../components/FloatingActionButton';
 import { getBlogsActions } from '../../../redux/actions';
 
 const Blogs = () => {
@@ -49,8 +50,8 @@ const Blogs = () => {
 
             <Row>
                 <Col xs={12}>
-                    <Card className="border-0 shadow-lg" style={{ borderRadius: '15px' }}>
-                        <Card.Header className="bg-gradient border-0 py-4" style={{ background: 'linear-gradient(135deg, #006AAB 0%, #004d7a 100%)', borderRadius: '15px 15px 0 0' }}>
+                    <Card className="border-0 shadow-lg animate-fade-in hover-lift" style={{ borderRadius: '15px' }}>
+                        <Card.Header className="bg-gradient border-0 gradient-animate" style={{ borderRadius: '15px 15px 0 0' }}>
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="d-flex align-items-center">
                                     <div className="bg-white bg-opacity-20 rounded-circle p-3 me-3">
@@ -69,7 +70,7 @@ const Blogs = () => {
                                 </div>
                             </div>
                         </Card.Header>
-                        <Card.Body className="p-4">
+                        <Card.Body className="py-0">
                             <div className="d-flex justify-content-between align-items-center mb-4">
                                 <div className="d-flex align-items-center gap-3">
                                     <div className="position-relative">
@@ -96,7 +97,7 @@ const Blogs = () => {
                                     )}
                                 </div>
                                 <Button
-                                    className="px-4 py-2 fw-semibold"
+                                    className="px-4 py-2 fw-semibold btn-animated hover-glow"
                                     style={{
                                         backgroundColor: '#006AAB',
                                         borderColor: '#006AAB',
@@ -113,8 +114,8 @@ const Blogs = () => {
                                 <Loading />
                             ) : blogsData.length > 0 ? (
                                 <div className="table-responsive">
-                                    <Table className="mb-0 table-hover" style={{ borderRadius: '10px', overflow: 'hidden' }}>
-                                        <thead style={{ backgroundColor: '#f8f9fa' }}>
+                                    <Table className="mb-0 modern-table">
+                                        <thead>
                                             <tr>
                                                 <th className="border-0 py-3 text-muted fw-semibold">#</th>
                                                 <th className="border-0 py-3 text-muted fw-semibold">Image</th>
@@ -127,7 +128,7 @@ const Blogs = () => {
                                         </thead>
                                         <tbody>
                                             {blogsData.map((data, index) => (
-                                                <tr key={data._id || index} className="border-bottom">
+                                                <tr key={data._id || index} className="stagger-item">
                                                     <td className="py-3 align-middle">
                                                         <span className="badge bg-light text-dark rounded-pill">{index + 1}</span>
                                                     </td>
@@ -165,42 +166,34 @@ const Blogs = () => {
                                                         </div>
                                                     </td>
                                                     <td className="py-3 align-middle">
-                                                        <Badge
-                                                            className={`px-3 py-2 ${data?.status ? 'bg-success' : 'bg-warning'}`}
-                                                            style={{ borderRadius: '20px' }}
-                                                        >
+                                                        <span className={`modern-badge ${data?.status ? 'status-active' : 'status-inactive'}`}>
                                                             <i className={`mdi ${data?.status ? 'mdi-eye' : 'mdi-eye-off'} me-1`}></i>
                                                             {data?.status ? 'Published' : 'Draft'}
-                                                        </Badge>
+                                                        </span>
                                                     </td>
                                                     <td className="py-3 align-middle text-center">
-                                                        <div className="btn-group" role="group">
-                                                            <Button
-                                                                size="sm"
-                                                                variant="outline-info"
-                                                                className="rounded-start"
+                                                        <div className="action-btn-group">
+                                                            <button
+                                                                className="action-btn view-btn"
                                                                 onClick={() => handleBlogsModal('View', data)}
                                                                 title="View Blog"
                                                             >
                                                                 <i className="mdi mdi-eye"></i>
-                                                            </Button>
-                                                            <Button
-                                                                size="sm"
-                                                                variant="outline-primary"
+                                                            </button>
+                                                            <button
+                                                                className="action-btn edit-btn"
                                                                 onClick={() => handleBlogsModal('Edit', data)}
                                                                 title="Edit Blog"
                                                             >
                                                                 <i className="mdi mdi-pencil"></i>
-                                                            </Button>
-                                                            <Button
-                                                                size="sm"
-                                                                variant="outline-danger"
-                                                                className="rounded-end"
+                                                            </button>
+                                                            <button
+                                                                className="action-btn delete-btn"
                                                                 onClick={() => handleBlogsModal('Delete', data)}
                                                                 title="Delete Blog"
                                                             >
                                                                 <i className="mdi mdi-delete"></i>
-                                                            </Button>
+                                                            </button>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -241,6 +234,12 @@ const Blogs = () => {
                 show={blogsModal.isVisible}
                 hide={() => setBlogsModal({ ...blogsModal, isVisible: false })}
                 blogsData={blogsModal}
+            />
+
+            <FloatingActionButton
+                onClick={() => handleBlogsModal('Add')}
+                icon="mdi-post-outline"
+                tooltip="Create New Blog"
             />
         </>
     );

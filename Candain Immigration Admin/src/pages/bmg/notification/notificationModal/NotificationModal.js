@@ -97,9 +97,7 @@ const NotificationModal = ({ show, hide, notificationData, setApiCall }) => {
     const requiredStar = <span className="text-danger fs-4">*</span>;
 
     return (
-        <Modal show={show} centered size="lg" backdrop="static"
-        // onHide={closeModal}
-        >
+        <Modal show={show} onHide={closeModal} centered size="lg" className="modal-animate">
             <Modal.Header className="px-2 py-1 text-light" style={{ backgroundColor: '#006AAB' }}>
                 <Modal.Title>{notificationData?.type} Notification</Modal.Title>
                 {/* <i className="mdi mdi-close fs-3" onClick={closeModal} style={{ cursor: 'pointer' }}></i> */}
@@ -148,14 +146,17 @@ const NotificationModal = ({ show, hide, notificationData, setApiCall }) => {
                 </Form>
             </Modal.Body>
             <Modal.Footer className="px-2 py-1">
-                <Button variant="danger" onClick={closeModal}>
-                    Cancel
+                <Button variant="danger" className="btn-cancel" onClick={closeModal}>
+                    <i className="mdi mdi-close"></i>Cancel
                 </Button>
-                <Button style={{ backgroundColor: '#006AAB' }} onClick={handleSubmit} disabled={loading}>
+                <Button className="btn-animated hover-glow" style={{ backgroundColor: '#006AAB' }} onClick={handleSubmit} disabled={loading}>
                     {loading ? (
                         <ButtonLoading />
                     ) : (
-                        <>{notificationData?.type === 'Edit' ? 'Update' : 'Add'} Notification</>
+                        <>
+                            <i className={`mdi ${notificationData?.type === 'Edit' ? 'mdi-content-save' : 'mdi-plus'} me-1`}></i>
+                            {notificationData?.type === 'Edit' ? 'Update' : 'Add'} Notification
+                        </>
                     )}
                 </Button>
             </Modal.Footer>
