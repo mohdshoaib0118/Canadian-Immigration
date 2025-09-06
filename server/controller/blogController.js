@@ -41,8 +41,7 @@ const Joi = require('joi');
 
 
 
-// Get all blog posts
-const getAllBlogs = async (req, res) => {
+ const getAllBlogs = async (req, res) => {
   try {
     const blogs = await blog.find().sort({ createdAt: -1 });
     res.status(200).json({ status: 200, message: "Blogs fetched successfully", response: blogs });
@@ -51,8 +50,7 @@ const getAllBlogs = async (req, res) => {
   }
 };
 
-// Get a single blog post by ID
-const getBlogById = async (req, res) => {
+ const getBlogById = async (req, res) => {
   try {
     const singleBlog = await blog.findById(req.params.id); 
     if (!singleBlog) {
@@ -65,8 +63,7 @@ const getBlogById = async (req, res) => {
 };
 
 
-// Update a blog post
-const updateBlog = async (req, res) => {
+ const updateBlog = async (req, res) => {
   try {
     const { heading, paragraph ,_id} = req.body;
     const updatedBlog = await blog.findByIdAndUpdate(
@@ -98,8 +95,7 @@ const updateBlog = async (req, res) => {
 };
 
 
-// Delete a blog post
-const deleteBlog = async (req, res) => {
+ const deleteBlog = async (req, res) => {
   try {
     const {_id}=req.body;
     const deletedBlog = await blog.findByIdAndDelete(_id);
