@@ -1,79 +1,98 @@
 import React, { useState, useEffect } from 'react'
 import { GoArrowUpRight } from "react-icons/go";
 import { blogAPI } from '../services/api';
-// images
-import Lady from '../assets/smallimages/Lady.png'
-import Passport from '../assets/smallimages/Passport.png'
-import Communication from '../assets/smallimages/Communication.png'
-import Img from '../assets/smallimages/Img.png'
-import Class from '../assets/smallimages/Class.png'
-import Teacher from '../assets/smallimages/Teacher.png'
+import BlogOffcanvas from './BlogOffcanvas';
+
 const Blogcart = () => {
-    const [blogs, setBlogs] = useState([]);
+    const [allBlogs, setAllBlogs] = useState([]);
+    const [visibleCount, setVisibleCount] = useState(6);
+    const [selectedBlog, setSelectedBlog] = useState(null);
+    const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
+    const [loading, setLoading] = useState(true);
+    console.log(selectedBlog, 'selectedBlog');
 
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
+                setLoading(true);
                 const response = await blogAPI.getAllBlogs();
-                setBlogs(response.data.response || response.data);
+                setAllBlogs(response.data.response || response.data);
             } catch (error) {
                 console.error('Error fetching blogs:', error);
+            } finally {
+                setLoading(false);
             }
         };
         fetchBlogs();
     }, []);
 
-    const Cardata = [
-        {
-            img: Lady,
-            heading: 'Major Restructuring of Australia’s Skilled Visa...',
-            parah: 'On 7th December 2024, the Department of Home Affairs introduced the most...'
-        },
-        {
-            img: Passport,
-            heading: 'The Most Powerful Passports in 2025 and...',
-            parah: 'A passport is more than just a travel document — it represents access...'
-        },
-        {
-            img: Communication,
-            heading: 'Visa Processing Times: What to Expect in 2025',
-            parah: 'Underfunding and existing backlogs have significantly impacted visa processing...'
-        },
-        {
-            img: Img,
-            heading: 'Canada Issues More PR Invitations via PNP Route',
-            parah: 'Canada invites more skilled workers for PR in June 23 PNP-specific draw.'
-        },
-        {
-            img: Class,
-            heading: 'Easiest Jobs to Qualify for Canada’s Express Entry Draws',
-            parah: 'PR through Express Entry is tough without in-demand skills.'
-        },
-        {
-            img: Teacher,
-            heading: 'New Pathway for International Teachers to Work in Canada',
-            parah: 'Easier immigration path now open for international teachers in Canada.'
-        },
-    ];
+    const loadMore = () => {
+        setVisibleCount(prev => prev + 6);
+    };
+
+    const handleReadMore = (blog) => {
+        setSelectedBlog(blog);
+        setIsOffcanvasOpen(true);
+    };
+
+    const closeOffcanvas = () => {
+        setIsOffcanvasOpen(false);
+        setSelectedBlog(null);
+    };
+
+    const visibleBlogs = allBlogs.slice(0, visibleCount);
+
+    if (loading) {
+        return (
+            <div className='container mx-auto mt-6 flex justify-center items-center min-h-96'>
+                <div className='flex flex-col items-center gap-4'>
+                    <div className='w-12 h-12 border-4 border-[#006AAB] border-t-transparent rounded-full animate-spin'></div>
+                    <p className='text-gray-600'>Loading blogs...</p>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className='container mx-auto mt-6'>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 xl:gap-x-12 gap-x-6 md:px-7 px-4 pb-9'>
-                {(blogs.length > 0 ? blogs : Cardata).map((items) => {
+                {visibleBlogs.map((items) => {
                     return (
-                        <div className='bg-white shadow-md rounded  mt-8 md:mt-14'>
-                            <img className='w-full h-64 object-cover' src={items.img} alt="" />
+                        <div className='bg-white shadow-md rounded mt-8 md:mt-14' key={items.id}>
+                            <img className='w-full h-64 object-cover' src={items.image} alt="" />
                             <div className='px-4 py-6'>
                                 <h3 className='md:text-2xl text-xl mb-4'>{items.heading}</h3>
                                 <h4 className='mb-4 md:text-lg text-base'>{items.parah}</h4>
-                                <h6 className='poppins-600 text-[#006AAB] flex items-center gap-1' >Read More <GoArrowUpRight /></h6>
+                                <button
+                                    onClick={() => handleReadMore(items)}
+                                    className='poppins-600 text-[#006AAB] flex items-center gap-1 hover:text-[#004d7a] transition-colors cursor-pointer'
+                                >
+                                    Read More <GoArrowUpRight />
+                                </button>
                             </div>
                         </div>
                     )
                 })}
             </div>
-            <div className='md:mb-44 mb-24 w-full flex items-center justify-center'>
-                <button className='lg:py-2 md:py-3 px-4 py-2 lg:px-4 md:px-8 rounded text-white lg:mt-3 sm:text-xl mt-5' id='buttonStyle'>Load More</button>
-            </div>
+            {visibleCount < allBlogs.length && (
+                <div className='md:mb-44 mb-24 w-full flex items-center justify-center'>
+                    <button
+                        onClick={loadMore}
+                        className='lg:py-2 md:py-3 px-4 py-2 lg:px-4 md:px-8 rounded text-white lg:mt-3 sm:text-xl mt-5'
+                        id='buttonStyle'
+                    >
+                        Load More
+                    </button>
+                </div>
+            )}
+
+            <BlogOffcanvas
+                isOpen={isOffcanvasOpen}
+                onClose={closeOffcanvas}
+                blog={selectedBlog}
+                allBlogs={allBlogs}
+                onBlogSelect={handleReadMore}
+            />
         </div>
     )
 }

@@ -15,8 +15,6 @@ const Faq = () => {
     const FaqData = faqDataReducer?.faqData?.response || [];
     const TotalRecords = faqDataReducer?.faqData?.response?.length || 0;
     const FaqLoading = faqDataReducer?.loading;
-    console.log(faqDataReducer, 'FaqData');
-
     const [search, setSearch] = useState('');
     const [pageIndex, setPageIndex] = useState(1);
     const [pageSize, setPageSize] = useState(20);

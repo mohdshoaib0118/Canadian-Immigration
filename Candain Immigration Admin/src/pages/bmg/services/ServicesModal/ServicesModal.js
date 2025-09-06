@@ -61,19 +61,16 @@ const ServicesModal = ({ show, hide, servicesData }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const newErrors = validateForm();
-        
+
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
             return;
         }
-
-        console.log('Service data:', formData);
         hide();
     };
 
     const handleDelete = () => {
         if (window.confirm('Are you sure you want to delete this service?')) {
-            console.log('Delete service:', servicesData.data._id);
             hide();
         }
     };
@@ -112,99 +109,99 @@ const ServicesModal = ({ show, hide, servicesData }) => {
                     </Modal.Header>
                     <Modal.Body>
                         <Form>
-                        <Row>
-                            <Col md={8}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Service Title <span className="text-danger fs-4">*</span></Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        name="title"
-                                        value={formData.title}
-                                        onChange={handleInputChange}
-                                        isInvalid={!!errors.title}
-                                        placeholder="e.g., Express Entry Program (minimum 3 characters)"
-                                        minLength={3}
-                                    />
-                                    <Form.Control.Feedback type="invalid">
-                                        {errors.title}
-                                    </Form.Control.Feedback>
-                                </Form.Group>
-                            </Col>
-                            <Col md={4}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Icon Class</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        name="icon"
-                                        value={formData.icon}
-                                        onChange={handleInputChange}
-                                        placeholder="mdi mdi-briefcase"
-                                    />
-                                    <Form.Text className="text-muted">
-                                        Material Design Icons class
-                                    </Form.Text>
-                                </Form.Group>
-                            </Col>
-                        </Row>
+                            <Row>
+                                <Col md={8}>
+                                    <Form.Group className="mb-3">
+                                        <Form.Label>Service Title <span className="text-danger fs-4">*</span></Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            name="title"
+                                            value={formData.title}
+                                            onChange={handleInputChange}
+                                            isInvalid={!!errors.title}
+                                            placeholder="e.g., Express Entry Program (minimum 3 characters)"
+                                            minLength={3}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.title}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                </Col>
+                                <Col md={4}>
+                                    <Form.Group className="mb-3">
+                                        <Form.Label>Icon Class</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            name="icon"
+                                            value={formData.icon}
+                                            onChange={handleInputChange}
+                                            placeholder="mdi mdi-briefcase"
+                                        />
+                                        <Form.Text className="text-muted">
+                                            Material Design Icons class
+                                        </Form.Text>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
 
-                        <Form.Group className="mb-3">
-                            <Form.Label>Description <span className="text-danger fs-4">*</span></Form.Label>
-                            <Form.Control
-                                as="textarea"
-                                rows={4}
-                                name="description"
-                                value={formData.description}
-                                onChange={handleInputChange}
-                                isInvalid={!!errors.description}
-                                placeholder="Enter detailed service description (minimum 10 characters)"
-                                minLength={10}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {errors.description}
-                            </Form.Control.Feedback>
-                        </Form.Group>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Description <span className="text-danger fs-4">*</span></Form.Label>
+                                <Form.Control
+                                    as="textarea"
+                                    rows={4}
+                                    name="description"
+                                    value={formData.description}
+                                    onChange={handleInputChange}
+                                    isInvalid={!!errors.description}
+                                    placeholder="Enter detailed service description (minimum 10 characters)"
+                                    minLength={10}
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.description}
+                                </Form.Control.Feedback>
+                            </Form.Group>
 
-                        <Row>
-                            <Col md={6}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Price (Optional)</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        name="price"
-                                        value={formData.price}
-                                        onChange={handleInputChange}
-                                        placeholder="Enter price in CAD"
-                                    />
-                                    <Form.Text className="text-muted">
-                                        Leave empty for "Contact Us" pricing
-                                    </Form.Text>
-                                </Form.Group>
-                            </Col>
-                            <Col md={6}>
-                                <Form.Group className="mb-3">
-                                    <Form.Check
-                                        type="checkbox"
-                                        name="status"
-                                        checked={formData.status}
-                                        onChange={handleInputChange}
-                                        label="Active Status"
-                                        className="mt-4"
-                                    />
-                                </Form.Group>
-                            </Col>
-                        </Row>
+                            <Row>
+                                <Col md={6}>
+                                    <Form.Group className="mb-3">
+                                        <Form.Label>Price (Optional)</Form.Label>
+                                        <Form.Control
+                                            type="number"
+                                            name="price"
+                                            value={formData.price}
+                                            onChange={handleInputChange}
+                                            placeholder="Enter price in CAD"
+                                        />
+                                        <Form.Text className="text-muted">
+                                            Leave empty for "Contact Us" pricing
+                                        </Form.Text>
+                                    </Form.Group>
+                                </Col>
+                                <Col md={6}>
+                                    <Form.Group className="mb-3">
+                                        <Form.Check
+                                            type="checkbox"
+                                            name="status"
+                                            checked={formData.status}
+                                            onChange={handleInputChange}
+                                            label="Active Status"
+                                            className="mt-4"
+                                        />
+                                    </Form.Group>
+                                </Col>
+                            </Row>
 
-                        <Form.Group className="mb-3">
-                            <Form.Label>Key Features</Form.Label>
-                            <Form.Control
-                                as="textarea"
-                                rows={3}
-                                name="features"
-                                value={formData.features}
-                                onChange={handleInputChange}
-                                placeholder="List key features (one per line)"
-                            />
-                        </Form.Group>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Key Features</Form.Label>
+                                <Form.Control
+                                    as="textarea"
+                                    rows={3}
+                                    name="features"
+                                    value={formData.features}
+                                    onChange={handleInputChange}
+                                    placeholder="List key features (one per line)"
+                                />
+                            </Form.Group>
                         </Form>
                     </Modal.Body>
                     <Modal.Footer className="px-2 py-1">

@@ -20,9 +20,11 @@ const Footer = () => {
                         Start Visa Consultations
                     </h5>
                 </div>
-                <button className="bg-white text-[#006AAB] md:px-10 px-2 lg:text-2xl sm:text-xl rounded-lg whitespace-nowrap text-sm my-2 md:my-0">
+                <Link to='/contact-us'>
+                    <button className="bg-white text-[#006AAB] md:px-10 px-2 lg:text-2xl sm:text-xl rounded-lg whitespace-nowrap text-sm my-2 md:my-0">
                     Let’s Get Started
-                </button>
+                    </button>
+                </Link>
             </div>
 
             {/* Background Image */}

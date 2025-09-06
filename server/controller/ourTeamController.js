@@ -1,9 +1,9 @@
 // controllers/teamController.js
 const ourTeam = require('../models/ourTeamModel');
 const Joi = require('joi');
- 
 
- 
+
+
 
 async function createTeamMember(req, res) {
   try {
@@ -42,7 +42,7 @@ async function createTeamMember(req, res) {
   }
 }
 
- const getAllTeamMembers = async (req, res) => {
+const getAllTeamMembers = async (req, res) => {
   try {
     const teamMembers = await ourTeam.find().sort({ createdAt: -1 });
     res.status(200).json({ status: 200, message: "Team members fetched successfully", response: teamMembers });
@@ -51,9 +51,9 @@ async function createTeamMember(req, res) {
   }
 };
 
- const getTeamMemberById = async (req, res) => {
+const getTeamMemberById = async (req, res) => {
   try {
-    const singleTeamMember = await ourTeam.findById(req.params.id); 
+    const singleTeamMember = await ourTeam.findById(req.params.id);
     if (!singleTeamMember) {
       return res.status(404).json({ status: 404, message: "Team member not found" });
     }
@@ -63,20 +63,19 @@ async function createTeamMember(req, res) {
   }
 };
 
- async function updateTeamMember(req, res) {
+async function updateTeamMember(req, res) {
   try {
     const { name, designation, _id } = req.body;
-    const updateData = { name, designation };
 
-     const existingTeamMember = await ourTeam.findById(_id);
+    const existingTeamMember = await ourTeam.findById(_id);
     if (!existingTeamMember) {
       return res.status(404).json({ status: 404, message: "Team member not found" });
     }
 
-     const updatedTeamMember = await ourTeam.findByIdAndUpdate(
+    const updatedTeamMember = await ourTeam.findByIdAndUpdate(
       _id,
-      updateData,
-      { new: true, runValidators: true }
+      { name, designation, ...(req.file && { image: `http://localhost:3500/uploads/${req.file.filename}` }) },
+      { new: true }
     );
 
     res.status(200).json({
@@ -93,7 +92,7 @@ async function createTeamMember(req, res) {
   }
 }
 
- const deleteTeamMember = async (req, res) => {
+const deleteTeamMember = async (req, res) => {
   try {
     const { _id } = req.body;
     const deletedTeamMember = await ourTeam.findByIdAndDelete(_id);

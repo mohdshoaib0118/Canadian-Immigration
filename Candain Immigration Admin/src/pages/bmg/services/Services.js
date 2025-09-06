@@ -29,7 +29,6 @@ const Services = () => {
 
     useEffect(() => {
         // Fetch services data
-        console.log('Fetching services:', { search, limit: pageSize, page: pageIndex });
     }, [search, pageIndex, pageSize]);
 
     const handleServicesModal = (type, data = null) => {

@@ -15,8 +15,6 @@ const Blogs = () => {
     const blogsData = blogsDataReducer?.blogsData?.blogs || [];
     const totalRecords = blogsDataReducer?.blogsData?.totalRecords || 0;
     const loading = blogsDataReducer?.loading;
-    console.log(blogsData, 'blogsData');
-
     const [search, setSearch] = useState('');
     const [pageIndex, setPageIndex] = useState(1);
     const [pageSize, setPageSize] = useState(20);

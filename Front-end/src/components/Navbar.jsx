@@ -15,7 +15,7 @@ import gsap from 'gsap';
 
 
 const Navbar = () => {
-    
+
     const navItemsRef = useRef();
     const location = useLocation();
     const [hasAnimated, setHasAnimated] = useState(false);
@@ -33,18 +33,18 @@ const Navbar = () => {
     const ShowHideSubheadingd = () => {
         setSubHeadings(prev => !prev)
     }
-    
-        // useGSAP(() => {
-        //     const tl = gsap.timeline();
-        //     tl.from(navItemsRef.current.children, {
-        //         x: -300,
-        //         opacity: 0,
-        //         duration: 1,
-        //         ease: 'power3.out',
-        //         stagger: 0.1, // delay between each item
-        //     });
 
-        // }, []);
+    // useGSAP(() => {
+    //     const tl = gsap.timeline();
+    //     tl.from(navItemsRef.current.children, {
+    //         x: -300,
+    //         opacity: 0,
+    //         duration: 1,
+    //         ease: 'power3.out',
+    //         stagger: 0.1, // delay between each item
+    //     });
+
+    // }, []);
 
     return (
         <div >
@@ -146,10 +146,12 @@ const Navbar = () => {
                                 `hover:text-[#006AAB] ${isActive ? 'text-[#006AAB] font-semibold' : 'text-black'}`
                             }
                         >
-                            Contact-us
+                            Contact Us
                         </NavLink>
                         <div>
-                            <button className='bg-[#F22941] hover:bg-[#da2f42] md:px-2 md:py-2  text-white rounded xl:text-xl text-base xl:py-2 xl:px-4 whitespace-nowrap cursor-pointer'>Book a consultation</button>
+                            <Link to='/contact-us'>
+                                <button className='bg-[#F22941] hover:bg-[#da2f42] md:px-2 md:py-2  text-white rounded xl:text-xl text-base xl:py-2 xl:px-4 whitespace-nowrap cursor-pointer'>Book a consultation</button>
+                            </Link>
                         </div>
                     </div>
                 </div>

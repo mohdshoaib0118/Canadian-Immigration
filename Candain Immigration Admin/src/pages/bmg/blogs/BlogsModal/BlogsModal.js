@@ -21,9 +21,7 @@ const BlogsModal = ({ show, hide, blogsData }) => {
     const [errors, setErrors] = useState({});
 
     useEffect(() => {
-        console.log('blogsData:', blogsData);
         if (blogsData.type === 'Edit' && blogsData.data) {
-            console.log('Edit mode - blogsData.data.image:', blogsData.data.image);
             setFormData({
                 heading: blogsData.data.heading || '',
                 paragraph: blogsData.data.paragraph || '',

@@ -79,9 +79,6 @@ const HelpSupportModal = ({ show, hide, file }) => {
         formData.append('priority', priorityType);
         formData.append('userId', user?.id);
         formData.append('sellerMail', user?.email);
-
-        console.log('Submit ticket:', formData);
-        // dispatch(addTicketsAction(formData));
     };
 
     const resetForm = () => {

@@ -11,11 +11,6 @@ import "slick-carousel/slick/slick-theme.css";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const Testimonial = () => {
-useEffect(() => {
-//   console.log(window.innerWidth);
-
-}, [])
-
 
     const PrevArrow = ({ onClick }) => (
         <div
@@ -100,24 +95,24 @@ useEffect(() => {
                 <div className='sm:w-3/4 lg:w-4/5   sm:mx-auto xl:w-full'>
                     <div className='w-full'>
                         <Slider {...settings}>
-                        {CardData.map((data, idx) => {
-                            return <div key={idx} className='p-8 shadow-lg rounded-2xl'>
-                                <img className='mb-4' src={data.img} alt="" />
-                                <h4 className='text-lg mb-2'>{data.parah}</h4>
-                                <div className='flex text-yellow-500 mb-4'>{data.stars}</div>
-                                <div className='flex items-center justify-between border-t-2 border-[#F0E4E4] pt-3'>
-                                    <div className='flex items-center gap-2'>
-                                        <img src={data.personimg} alt="" className='w-12 object-cover rounded-full' />
-                                        <span>John Strong <br /> Happy Customer</span>
-                                        <h4></h4>
-                                    </div>
-                                    <div>
-                                        <img src={data.GoogleImg} alt="" />
+                            {CardData.map((data, idx) => {
+                                return <div key={idx} className='p-8 shadow-lg rounded-2xl'>
+                                    <img className='mb-4' src={data.img} alt="" />
+                                    <h4 className='text-lg mb-2'>{data.parah}</h4>
+                                    <div className='flex text-yellow-500 mb-4'>{data.stars}</div>
+                                    <div className='flex items-center justify-between border-t-2 border-[#F0E4E4] pt-3'>
+                                        <div className='flex items-center gap-2'>
+                                            <img src={data.personimg} alt="" className='w-12 object-cover rounded-full' />
+                                            <span>John Strong <br /> Happy Customer</span>
+                                            <h4></h4>
+                                        </div>
+                                        <div>
+                                            <img src={data.GoogleImg} alt="" />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        })}
-                    </Slider>
+                            })}
+                        </Slider>
                     </div>
                 </div>
             </div>
