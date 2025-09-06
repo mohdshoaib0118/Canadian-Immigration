@@ -1,0 +1,10 @@
+.fade-wrap {
+    transition: opacity 600ms ease, transform 600ms ease;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.fade-wrap.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}

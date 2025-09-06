@@ -6,22 +6,35 @@ import WhyUs from '../components/WhyUs'
 import MeetTeam from '../components/MeetTeam'
 import Testimonial from '../components/Testimonial'
 import Footer from '../components/Footer'
+import FadeInOnScroll from './FadeInOnScroll'
 
 const About = () => {
     return (
         <div>
             <Navbar />
-            <SectionWithImage />
-            <CanadianDreams />
-            <WhyUs />
-            <MeetTeam />
-            <div className='flex flex-col bg-[#F4FBFF]'>
-                <div className=''>
+            <FadeInOnScroll>
+                <SectionWithImage />
+            </FadeInOnScroll>
+
+            <FadeInOnScroll>
+                <CanadianDreams />
+            </FadeInOnScroll>
+
+            <FadeInOnScroll>
+                <WhyUs />
+            </FadeInOnScroll>
+
+            <FadeInOnScroll>
+                <MeetTeam />
+            </FadeInOnScroll>
+
+            <div className="flex flex-col bg-[#F4FBFF]">
+                <FadeInOnScroll>
                     <Testimonial />
-                </div>
-                <div>
+                </FadeInOnScroll>
+                <FadeInOnScroll>
                     <Footer />
-                </div>
+                </FadeInOnScroll>
             </div>
         </div>
     )
