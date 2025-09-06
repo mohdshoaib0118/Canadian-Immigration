@@ -11,11 +11,9 @@ import { getTeamsActions } from '../../../redux/actions';
 const Teams = () => {
     const dispatch = useDispatch();
     const { teamsDataReducer } = useSelector((state) => state);
-
     const TeamsData = teamsDataReducer?.teamsData?.response || [];
     const TotalRecords = teamsDataReducer?.teamsData?.response?.length || 0;
     const TeamsLoading = teamsDataReducer?.loading;
-    console.log(TeamsData, 'TeamsData');
 
     const [search, setSearch] = useState('');
     const [pageIndex, setPageIndex] = useState(1);
@@ -36,8 +34,18 @@ const Teams = () => {
         dispatch(getTeamsActions({ search, limit: pageSize, page: pageIndex }));
     }, [dispatch, search, pageIndex, pageSize]);
 
+
+
     const handleTeamsModal = (type, data = null) => {
         setTeamsModal({ type, data, isVisible: true });
+    };
+
+    const handleModalClose = () => {
+        setTeamsModal({ type: '', data: null, isVisible: false });
+        // Refetch data after a short delay to ensure operation completed
+        setTimeout(() => {
+            dispatch(getTeamsActions({ search, limit: pageSize, page: pageIndex }));
+        }, 500);
     };
 
     return (
@@ -208,11 +216,13 @@ const Teams = () => {
                     </Card>
                 </Col>
             </Row>
-            <TeamsModal
-                show={teamsModal.isVisible}
-                hide={() => setTeamsModal({ ...teamsModal, isVisible: false })}
-                teamsData={teamsModal}
-            />
+            {teamsModal.isVisible && (
+                <TeamsModal
+                    show={teamsModal.isVisible}
+                    hide={handleModalClose}
+                    teamsData={teamsModal}
+                />
+            )}
 
             <FloatingActionButton
                 onClick={() => handleTeamsModal('Add')}

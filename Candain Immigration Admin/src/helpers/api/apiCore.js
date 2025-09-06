@@ -4,7 +4,7 @@ import axios from 'axios';
 import config from '../../config';
 
 // content type
-// axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.baseURL = config.API_URL;
 // intercepting to capture errors
 
@@ -65,8 +65,8 @@ class APICore {
         if (params) {
             var queryString = params
                 ? Object.keys(params)
-                      .map((key) => key + '=' + params[key])
-                      .join('&')
+                    .map((key) => key + '=' + params[key])
+                    .join('&')
                 : '';
             response = axios.get(`${url}?${queryString}`, params);
         } else {
@@ -80,8 +80,8 @@ class APICore {
         if (params) {
             var queryString = params
                 ? Object.keys(params)
-                      .map((key) => key + '=' + params[key])
-                      .join('&')
+                    .map((key) => key + '=' + params[key])
+                    .join('&')
                 : '';
             response = axios.get(`${url}?${queryString}`, { responseType: 'blob' });
         } else {
@@ -96,8 +96,8 @@ class APICore {
         if (params) {
             queryString = params
                 ? Object.keys(params)
-                      .map((key) => key + '=' + params[key])
-                      .join('&')
+                    .map((key) => key + '=' + params[key])
+                    .join('&')
                 : '';
         }
 
@@ -179,6 +179,29 @@ class APICore {
             },
         };
         return axios.patch(url, formData, config);
+    };
+
+    /**
+     * PUT given data to url with file
+     */
+    updatePutWithFile = (url, data) => {
+        let formData;
+        if (data instanceof FormData) {
+            formData = data;
+        } else {
+            formData = new FormData();
+            for (const k in data) {
+                formData.append(k, data[k]);
+            }
+        }
+
+        const config = {
+            headers: {
+                ...axios.defaults.headers,
+                'content-type': 'multipart/form-data',
+            },
+        };
+        return axios.put(url, formData, config);
     };
 
     isUserAuthenticated = () => {

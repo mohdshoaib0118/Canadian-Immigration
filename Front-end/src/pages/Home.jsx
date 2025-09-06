@@ -25,28 +25,28 @@ const Home = () => {
     const headingRef = useRef();
     const subheadingRef = useRef();
     const paragraphRef = useRef();
-    // useGSAP(() => {
-    //     const tl = gsap.timeline();
+    useGSAP(() => {
+        const tl = gsap.timeline();
 
-    //     tl.from(headingRef.current, {
-    //         y: -100,
-    //         opacity: 0,
-    //         duration: 0.8,
-    //         ease: 'power3.out',
-    //     })
-    //         .from(subheadingRef.current, {
-    //             y: -100,
-    //             opacity: 0,
-    //             duration: 0.8,
-    //             ease: 'power3.out',
-    //         },)
-    //         .from(paragraphRef.current, {
-    //             y: -100,
-    //             opacity: 0,
-    //             duration: 0.8,
-    //             ease: 'power3.out',
-    //         },);
-    // }, []);
+        tl.from(headingRef.current, {
+            y: -100,
+            opacity: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+        })
+            .from(subheadingRef.current, {
+                y: -100,
+                opacity: 0,
+                duration: 0.8,
+                ease: 'power3.out',
+            })
+            .from(paragraphRef.current, {
+                y: -100,
+                opacity: 0,
+                duration: 0.8,
+                ease: 'power3.out',
+            });
+    }, []);
     return (
         <div>
             {/* Navbar */}

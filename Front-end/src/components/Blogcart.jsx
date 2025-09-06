@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { GoArrowUpRight } from "react-icons/go";
+import { blogAPI } from '../services/api';
 // images
 import Lady from '../assets/smallimages/Lady.png'
 import Passport from '../assets/smallimages/Passport.png'
@@ -8,6 +9,20 @@ import Img from '../assets/smallimages/Img.png'
 import Class from '../assets/smallimages/Class.png'
 import Teacher from '../assets/smallimages/Teacher.png'
 const Blogcart = () => {
+    const [blogs, setBlogs] = useState([]);
+
+    useEffect(() => {
+        const fetchBlogs = async () => {
+            try {
+                const response = await blogAPI.getAllBlogs();
+                setBlogs(response.data.response || response.data);
+            } catch (error) {
+                console.error('Error fetching blogs:', error);
+            }
+        };
+        fetchBlogs();
+    }, []);
+
     const Cardata = [
         {
             img: Lady,
@@ -43,7 +58,7 @@ const Blogcart = () => {
     return (
         <div className='container mx-auto mt-6'>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 xl:gap-x-12 gap-x-6 md:px-7 px-4 pb-9'>
-                {Cardata.map((items) => {
+                {(blogs.length > 0 ? blogs : Cardata).map((items) => {
                     return (
                         <div className='bg-white shadow-md rounded  mt-8 md:mt-14'>
                             <img className='w-full h-64 object-cover' src={items.img} alt="" />

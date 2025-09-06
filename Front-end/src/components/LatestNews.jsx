@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Lady from '../assets/smallimages/Lady.png'
 import Passport from '../assets/smallimages/Passport.png'
 import Communication from '../assets/smallimages/Communication.png'
@@ -7,8 +7,24 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { GoArrowUpRight } from "react-icons/go";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { newsAPI } from '../services/api';
 
 const LatestNews = () => {
+  const [news, setNews] = useState([]);
+  console.log(news, 'news');
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const response = await newsAPI.getAllLatestNews();
+        setNews(response.data.response);
+      } catch (error) {
+        console.error('Error fetching news:', error);
+      }
+    };
+    fetchNews();
+  }, []);
+
   const Cardata = [
     {
       img: Lady,
@@ -80,16 +96,16 @@ const LatestNews = () => {
         {/* Cart Main Div */}
         <div className='sm:w-3/4 lg:w-4/5 xl:px-4 sm:mx-auto xl:w-full'>
           <Slider {...settings}>
-            {Cardata.map((items) => {
-              return(
-              <div className='bg-white  shadow md:w-1/3'>
-                <img className='w-full md:h-64 h-54' src={items.img} alt="" />
-                <div className='px-4 py-6'>
-                  <h3 className='md:text-2xl text-xl mb-2 md:mb-4'>{items.heading}</h3>
-                  <h4 className='mb-4 md:text-lg'>{items.parah}</h4>
-                  <h6 className='poppins-600 text-[#006AAB] flex items-center gap-1'>Read More <GoArrowUpRight /></h6>
-                </div>
-              </div>)
+            {(news.length > 0 ? news : Cardata).map((items) => {
+              return (
+                <div className='bg-white  shadow md:w-1/3'>
+                  <img className='w-full md:h-64 h-54' src={items.image || items.img} alt="" />
+                  <div className='px-4 py-6'>
+                    <h3 className='md:text-2xl text-xl mb-2 md:mb-4'>{items.heading}</h3>
+                    <h4 className='mb-4 md:text-lg'>{items.paragraph || items.parah}</h4>
+                    <h6 className='poppins-600 text-[#006AAB] flex items-center gap-1'>Read More <GoArrowUpRight /></h6>
+                  </div>
+                </div>)
             })}
           </Slider>
         </div>

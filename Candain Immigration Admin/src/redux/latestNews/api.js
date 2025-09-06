@@ -14,7 +14,7 @@ const addLatestNews = (data) => {
 
 const editLatestNews = (data) => {
     const baseURL = '/api/latestNews/edit';
-    return api.update(`${baseURL}`, data);
+    return api.updatePutWithFile(`${baseURL}`, data);
 };
 
 const deleteLatestNews = (data) => {

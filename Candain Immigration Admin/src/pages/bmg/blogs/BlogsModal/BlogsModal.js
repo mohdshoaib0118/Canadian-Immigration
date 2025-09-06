@@ -21,7 +21,9 @@ const BlogsModal = ({ show, hide, blogsData }) => {
     const [errors, setErrors] = useState({});
 
     useEffect(() => {
+        console.log('blogsData:', blogsData);
         if (blogsData.type === 'Edit' && blogsData.data) {
+            console.log('Edit mode - blogsData.data.image:', blogsData.data.image);
             setFormData({
                 heading: blogsData.data.heading || '',
                 paragraph: blogsData.data.paragraph || '',
@@ -45,16 +47,22 @@ const BlogsModal = ({ show, hide, blogsData }) => {
     const handleInputChange = (e) => {
         const { name, value, type, checked, files } = e.target;
 
-        if (type === 'file' && files[0]) {
-            const file = files[0];
-            setFormData(prev => ({ ...prev, [name]: file }));
+        if (type === 'file') {
+            if (files && files[0]) {
+                const file = files[0];
+                setFormData(prev => ({ ...prev, [name]: file }));
 
-            // Create preview URL for selected image
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                setSelectedImagePreview(e.target.result);
-            };
-            reader.readAsDataURL(file);
+                // Create preview URL for selected image
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    setSelectedImagePreview(e.target.result);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                // File input was cleared
+                setFormData(prev => ({ ...prev, [name]: null }));
+                setSelectedImagePreview(null);
+            }
         } else {
             setFormData(prev => ({
                 ...prev,
@@ -92,8 +100,11 @@ const BlogsModal = ({ show, hide, blogsData }) => {
             paragraph: formData.paragraph
         };
 
-        if (formData.image) {
+        // Only include image if a new file is actually selected
+        if (formData.image && formData.image instanceof File) {
             submitData.image = formData.image;
+        } else if (blogsData.type === 'Edit' && existingImage) {
+            submitData.existingImage = existingImage;
         }
 
         if (blogsData.type === 'Edit') {

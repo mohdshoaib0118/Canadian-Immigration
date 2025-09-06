@@ -20,7 +20,7 @@ const teamsApi = {
 
     editTeamMember: (data) => {
         const baseUrl = '/api/teamMember/edit';
-        return api.update(`${baseUrl}`, data);
+        return api.updatePutWithFile(`${baseUrl}`, data);
     },
 
     deleteTeamMember: (data) => {

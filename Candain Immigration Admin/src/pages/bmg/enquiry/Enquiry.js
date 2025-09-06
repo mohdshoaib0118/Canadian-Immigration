@@ -9,19 +9,36 @@ const Enquiry = () => {
     const store = useSelector((state) => state);
     const dispatch = useDispatch();
     const [search, setSearch] = useState('');
-    const EnquiryData = store?.enquiryDataReducer?.enquiryData?.contacts;
+    const allEnquiryData = store?.enquiryDataReducer?.enquiryData?.response || [];
     const EnquiryLoading = store?.enquiryDataReducer?.loading;
-    const TotalRecords = store?.enquiryDataReducer?.enquiryData?.totalRecords;
     const [pageIndex, setPageIndex] = useState(1);
     const [pageSize, setPageSize] = useState(20);
-    const [totalPages, setTotalPages] = useState(Math.ceil(TotalRecords / pageSize));
+    
+    // Client-side filtering
+    const filteredData = allEnquiryData.filter(item => {
+        if (!search) return true;
+        const searchLower = search.toLowerCase();
+        return (
+            (item.firstName?.toLowerCase().includes(searchLower)) ||
+            (item.lastName?.toLowerCase().includes(searchLower)) ||
+            (item.email?.toLowerCase().includes(searchLower)) ||
+            (item.message?.toLowerCase().includes(searchLower))
+        );
+    });
+    
+    // Client-side pagination
+    const TotalRecords = filteredData.length;
+    const totalPages = Math.ceil(TotalRecords / pageSize);
+    const startIndex = (pageIndex - 1) * pageSize;
+    const EnquiryData = filteredData.slice(startIndex, startIndex + pageSize);
 
     useEffect(() => {
-        setTotalPages(Math.ceil(TotalRecords / pageSize));
-    }, [TotalRecords, pageSize]);
+        dispatch(getEnquiryActions({}));
+    }, [dispatch]);
+    
     useEffect(() => {
-        dispatch(getEnquiryActions({ search: search, limit: pageSize, page: pageIndex }));
-    }, [dispatch, pageIndex, pageSize, search]);
+        setPageIndex(1); // Reset to first page when search changes
+    }, [search]);
 
     return (
         <>
@@ -114,7 +131,7 @@ const Enquiry = () => {
                                                                             <i className="mdi mdi-account text-muted"></i>
                                                                         </div>
                                                                         <div>
-                                                                            <div className="fw-bold text-dark">{data?.fullName || 'N/A'}</div>
+                                                                            <div className="fw-bold text-dark">{`${data?.firstName || ''} ${data?.lastName || ''}`.trim() || 'N/A'}</div>
                                                                             <small className="text-muted">Customer</small>
                                                                         </div>
                                                                     </div>

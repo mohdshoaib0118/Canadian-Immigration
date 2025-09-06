@@ -1,7 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { contactAPI } from '../services/api'
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
+import 'react-phone-number-input/style.css'
+import { useGSAP } from '@gsap/react'
+import { fadeInUp, staggerAnimation, buttonHover } from '../utils/animations'
 
 const Form = () => {
+    const formRef = useRef(null);
+    const fieldsRef = useRef([]);
+    const submitBtnRef = useRef(null);
 
     const [formdata, setFormData] = useState({
         firstname: '',
@@ -40,12 +47,10 @@ const Form = () => {
         } else if (!emailRegex.test(formdata.emailid)) {
             error.emailiderror = "Enter a valid email"
         }
-        if (!formdata.phone.trim()) {
+        if (!formdata.phone) {
             error.phonenoerror = 'Phone number is required';
-        } else if (formdata.phone.trim().length !== 10) {
-            error.phonenoerror = "Enter a valid no."
-        } else if (!Number(formdata.phone)) {
-            error.phonenoerror = 'Enter Correct no.'
+        } else if (!isValidPhoneNumber(formdata.phone)) {
+            error.phonenoerror = 'Please enter a valid phone number for the selected country';
         }
         if (!formdata.role.trim()) {
             error.roleerror = 'Role is required';
@@ -67,6 +72,15 @@ const Form = () => {
     }
 
 
+    useGSAP(() => {
+        if (fieldsRef.current.length > 0) {
+            staggerAnimation(fieldsRef.current, 'up');
+        }
+        if (submitBtnRef.current) {
+            buttonHover(submitBtnRef.current);
+        }
+    }, []);
+
     const submithandler = async (e) => {
         e.preventDefault();
         const validationErrors = errorhandler();
@@ -79,7 +93,7 @@ const Form = () => {
                     firstName: formdata.firstname,
                     lastName: formdata.lastname,
                     email: formdata.emailid,
-                    phoneNumber: parseInt(formdata.phone),
+                    phoneNumber: formdata.phone,
                     role: formdata.role,
                     message: formdata.message
                 });
@@ -121,64 +135,63 @@ const Form = () => {
         }
     }
     return (
-        <form>
+        <form ref={formRef}>
             <div className='grid sm:grid-cols-2 gap-5 mt-4'>
-                <div className='flex flex-col'>
-                    <label htmlFor="">First Name</label>
+                <div className='flex flex-col' ref={el => fieldsRef.current[0] = el}>
+                    <label htmlFor="">First Name <span className='text-red-600'>*</span></label>
                     <input
                         onChange={handleChange}
                         value={formdata.firstname}
                         type="text"
                         name="firstname"
                         placeholder="Enter First Name"
-                        className='px-3 border-1 py-3 rounded border-[#D4D4D4] focus:outline-none text-[#BDB6B6]'
+                        className='px-3 border-1 py-3 rounded border-[#D4D4D4] focus:outline-none text-[#BDB6B6] transition-all duration-300 focus:border-[#006AAB] focus:shadow-lg'
                     />
                     {errors.firstnameerror ? <h4 className='text-sm flex flex-nowrap items-center text-red-600'><span className='text-red-600'>*</span>{errors.firstnameerror}</h4> : ''}
                 </div>
-                <div className='flex flex-col'>
-                    <label htmlFor="">Last Name</label>
+                <div className='flex flex-col' ref={el => fieldsRef.current[1] = el}>
+                    <label htmlFor="">Last Name <span className='text-red-600'>*</span></label>
                     <input
                         onChange={handleChange}
                         value={formdata.lastname}
                         type="text"
                         name="lastname"
                         placeholder="Enter Last Name"
-                        className='px-3 border-1 py-3 rounded border-[#D4D4D4] focus:outline-none text-[#BDB6B6]'
+                        className='px-3 border-1 py-3 rounded border-[#D4D4D4] focus:outline-none text-[#BDB6B6] transition-all duration-300 focus:border-[#006AAB] focus:shadow-lg'
                     />
                     {errors.lastnameerror ? <h4 className='text-sm flex flex-nowrap items-center text-red-600'><span className='text-red-600'>*</span>{errors.lastnameerror}</h4> : ''}
                 </div>
-                <div className='flex flex-col'>
-                    <label htmlFor="">Email Id</label>
+                <div className='flex flex-col' ref={el => fieldsRef.current[2] = el}>
+                    <label htmlFor="">Email Id <span className='text-red-600'>*</span></label>
                     <input
                         onChange={handleChange}
                         value={formdata.emailid}
                         type="email"
                         name="emailid"
                         placeholder="Enter Email Id"
-                        className='px-3 border-1 py-3 rounded border-[#D4D4D4] focus:outline-none text-[#BDB6B6]'
+                        className='px-3 border-1 py-3 rounded border-[#D4D4D4] focus:outline-none text-[#BDB6B6] transition-all duration-300 focus:border-[#006AAB] focus:shadow-lg'
                     />
                     {errors.emailiderror ? <h4 className='text-sm flex flex-nowrap items-center text-red-600'><span className='text-red-600'>*</span>{errors.emailiderror}</h4> : ''}
                 </div>
-                <div className='flex flex-col'>
-                    <label htmlFor="">Phone No.</label>
-                    <input
-                        onChange={handleChange}
+                <div className='flex flex-col' ref={el => fieldsRef.current[3] = el}>
+                    <label htmlFor="">Phone No. <span className='text-red-600'>*</span></label>
+                    <PhoneInput
+                        placeholder="Enter phone number"
                         value={formdata.phone}
-                        type="tel"
-                        name="phone"
-                        placeholder="Enter Phone No."
-                        className='px-3 border-1 py-3 rounded border-[#D4D4D4] focus:outline-none text-[#BDB6B6]'
+                        onChange={(value) => setFormData({...formdata, phone: value})}
+                        defaultCountry="CA"
+                        className='px-3 border-1 py-3 rounded border-[#D4D4D4] focus:outline-none transition-all duration-300 focus:border-[#006AAB] focus:shadow-lg'
                     />
                     {errors.phonenoerror ? <h4 className='text-sm flex flex-nowrap items-center text-red-600'><span className='text-red-600'>*</span>{errors.phonenoerror}</h4> : ''}
                 </div>
             </div>
 
-            <div className='mt-4'>
-                <label htmlFor="" className='-mb-3 block'>I am an</label>
+            <div className='mt-4' ref={el => fieldsRef.current[4] = el}>
+                <label htmlFor="" className='-mb-3 block'>I am an <span className='text-red-600'>*</span></label>
                 <select name="role"
                     onChange={handleChange}
                     value={formdata.role}
-                    className='focus:outline-none w-full mt-4 py-4 px-2 border-[#D4D4D4] border rounded appearance-none text-[#BDB6B6]'
+                    className='focus:outline-none w-full mt-4 py-4 px-2 border-[#D4D4D4] border rounded appearance-none text-[#BDB6B6] transition-all duration-300 focus:border-[#006AAB] focus:shadow-lg'
                     style={{
                         backgroundImage: `url("data:image/svg+xml;utf8,<svg fill='gray' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>")`,
                         backgroundRepeat: "no-repeat",
@@ -192,14 +205,14 @@ const Form = () => {
                 {errors.roleerror ? <h4 className='text-sm flex flex-nowrap items-center text-red-600'><span className='text-red-600'>*</span>{errors.roleerror}</h4> : ''}
             </div>
 
-            <div className='mt-4'>
-                <label className='mb-1 block' htmlFor="">Message</label>
+            <div className='mt-4' ref={el => fieldsRef.current[5] = el}>
+                <label className='mb-1 block' htmlFor="">Message <span className='text-red-600'>*</span></label>
                 <textarea
                     onChange={handleChange}
                     value={formdata.message}
                     name="message"
                     placeholder="Type your message here"
-                    className='w-full focus:outline-none border-[#D4D4D4] border py-4 px-2 resize-none rounded h-24 text-[#BDB6B6]'
+                    className='w-full focus:outline-none border-[#D4D4D4] border py-4 px-2 resize-none rounded h-24 text-[#BDB6B6] transition-all duration-300 focus:border-[#006AAB] focus:shadow-lg'
                 >
                 </textarea>
                 {errors.messageerror ? <h4 className='text-sm flex flex-nowrap items-center text-red-600'><span className='text-red-600'>*</span>{errors.messageerror}</h4> : ''}
@@ -212,10 +225,11 @@ const Form = () => {
             )}
             
             <button 
+                ref={submitBtnRef}
                 onClick={submithandler} 
                 disabled={isSubmitting}
-                className={`sm:text-2xl text-lg px-4 py-2 mt-6 sm:mt-9 text-white rounded hover:cursor-pointer ${
-                    isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#006AAB]'
+                className={`sm:text-2xl text-lg px-4 py-2 mt-6 sm:mt-9 text-white rounded transition-all duration-300 transform ${
+                    isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#006AAB] hover:bg-[#1085ce] hover:shadow-lg active:scale-95'
                 }`} 
                 id='buttonStyle'
             >

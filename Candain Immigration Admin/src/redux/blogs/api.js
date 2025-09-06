@@ -20,7 +20,7 @@ const blogsApi = {
 
     editBlog: (data) => {
         const baseUrl = '/api/blog/edit';
-        return api.update(`${baseUrl}`, data);
+        return api.updatePutWithFile(`${baseUrl}`, data);
     },
 
     deleteBlog: (data) => {
