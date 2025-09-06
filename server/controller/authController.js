@@ -5,19 +5,16 @@ const { verifyToken } = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
-// Register Route
-async function registerUser(req,res) {
+ async function registerUser(req,res) {
      try {
     const { name, email, password, phoneNumber } = req.body;
 
-    // Check if user exists
-    const existingUser = await User.findOne({ email });
+     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: 'Email already exists' });
     }
 
-    // Create new user
-    const user = new User({
+     const user = new User({
       name,
       email,
       password,
@@ -26,8 +23,7 @@ async function registerUser(req,res) {
 
     await user.save();
 
-    // Generate JWT
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
       expiresIn: '1d',
     });
 
@@ -46,25 +42,21 @@ async function registerUser(req,res) {
   }
 }  
 
-// Login Route
-async function loginUser(req,res) {
+ async function loginUser(req,res) {
       try {
     const { email, password } = req.body;
 
-    // Find user
-    const user = await User.findOne({ email });
+     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    // Check password
-    const isMatch = await user.comparePassword(password);
+     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    // Generate JWT
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
       expiresIn: '1d',
     });
 
@@ -83,8 +75,7 @@ async function loginUser(req,res) {
   }
 }
 
-// Protected Route Example
-async function getUserProfile(req,res) {
+ async function getUserProfile(req,res) {
    try {
     const user = await User.findById(req.user.userId).select('-password');
     res.json(user);
