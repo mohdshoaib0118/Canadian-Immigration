@@ -39,8 +39,7 @@ async function createLatestNews(req, res) {
   }
 }
 
-// Get all latest news posts
-const getAllLatestNews = async (req, res) => {
+ const getAllLatestNews = async (req, res) => {
   try {
     const latestNewss = await latestNews.find().sort({ createdAt: -1 });
     res.status(200).json({ status: 200, message: "Latest news fetched successfully", response: latestNewss });
@@ -50,8 +49,7 @@ const getAllLatestNews = async (req, res) => {
   }
 };
 
-// Get a single latest news post by ID
-const getLatestNewsById = async (req, res) => {
+ const getLatestNewsById = async (req, res) => {
   try {
     const singleLatestNews = await latestNews.findById(req.params.id);
     if (!singleLatestNews) {
@@ -63,8 +61,7 @@ const getLatestNewsById = async (req, res) => {
   }
 };
 
-// Update a latest news post
-const updateLatestNews = async (req, res) => {
+ const updateLatestNews = async (req, res) => {
   try {
     const { heading, paragraph, _id } = req.body;
     const updatedLatestNews = await latestNews.findByIdAndUpdate(
@@ -95,8 +92,7 @@ const updateLatestNews = async (req, res) => {
   }
 };
 
-// Delete a latest news post
-const deleteLatestNews = async (req, res) => {
+ const deleteLatestNews = async (req, res) => {
   try {
     const { _id } = req.body;
     const deletedLatestNews = await latestNews.findByIdAndDelete(_id);

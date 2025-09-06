@@ -32,8 +32,7 @@ async function createFAQ(req, res) {
   }
 }
 
-// Get all FAQs
-const getAllFAQs = async (req, res) => {
+ const getAllFAQs = async (req, res) => {
   try {
     const faqs = await faq.find().sort({ createdAt: -1 });
     res.status(200).json({ status: 200, message: "FAQs fetched successfully", response: faqs });
@@ -42,8 +41,7 @@ const getAllFAQs = async (req, res) => {
   }
 };
 
-// Get a single FAQ by ID
-const getFAQById = async (req, res) => {
+ const getFAQById = async (req, res) => {
   try {
     const singleFAQ = await faq.findById(req.params.id); 
     if (!singleFAQ) {
@@ -55,8 +53,7 @@ const getFAQById = async (req, res) => {
   }
 };
 
-// Update a FAQ
-const updateFAQ = async (req, res) => {
+ const updateFAQ = async (req, res) => {
   try {
     const { question, answer, _id } = req.body;
     const updatedFAQ = await faq.findByIdAndUpdate(
@@ -83,8 +80,7 @@ const updateFAQ = async (req, res) => {
   }
 };
 
-// Delete a FAQ
-const deleteFAQ = async (req, res) => {
+ const deleteFAQ = async (req, res) => {
   try {
     const { _id } = req.body;
     const deletedFAQ = await faq.findByIdAndDelete(_id);

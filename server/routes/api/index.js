@@ -7,6 +7,6 @@ router.use("/blog", require('./blogRoute'));
 router.use("/latestNews", require('./latestNewRoute'));
 router.use("/faq", require('./faqRoute'));
 router.use("/teamMember", require('./ourTeamRoute'));
-
+router.use("/contactUs", require('./contactUsRoute'));
 module.exports = router;
     
