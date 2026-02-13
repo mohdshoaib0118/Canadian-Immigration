@@ -166,7 +166,9 @@ const Home = () => {
 
 
             {/* Sections with Fade-in Scroll Animations */}
-            <FadeInOnScroll><CanadianDreams /></FadeInOnScroll>
+            <FadeInOnScroll>
+                <CanadianDreams />
+                </FadeInOnScroll>
             <FadeInOnScroll><WhyUs /></FadeInOnScroll>
             <FadeInOnScroll><ImmiGrationNeeds /></FadeInOnScroll>
 

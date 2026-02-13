@@ -117,7 +117,7 @@ const Navbar = ({ services, subServices }) => {
         <div>
             {/* Top Bar */}
             {/* Moblile Bottom Blue Section */}
-            <div className="flex items-center justify-between   bg-[#006AAB] py-3.5 text-white lg:hidden">
+            <div className="flex items-center justify-between   bg-[#006AAB] py-3.5 text-white lg:hidden ">
                 <div className='lg:container mx-auto px-4'>
                     <div className="flex items-center xl:gap-3 gap-1.5">
                         <IoCall className='text-[16px] sm:text-[28px]' />
